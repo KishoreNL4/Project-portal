@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instructor Dashboard</title>
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+    <style>
+      .gradient-text {
+        font-size: 3rem; /* Adjust font size as needed */
+        font-weight: bold;
+        background: -webkit-linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For Chrome, Safari, and Opera */
+        background: linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For modern browsers */
+        -webkit-background-clip: text; /* Chrome, Safari, Opera */
+        background-clip: text; /* Standard */
+        color: transparent; /* Hide the original text color */
+        display: inline-block; /* Ensure it respects text sizing */
+      }
+       .table-container {
+            max-height: 400px; /* Adjust based on your needs */
+            overflow-y: auto;
+        }
+         .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 1000;
+            padding: 20px;
+            width: 300px;
+        }
+        .popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+
+    </style>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-[#232744] text-white p-4">
+      <h1 class="text-2xl font-bold px-2 py-1 gradient-text">
+        Admin Dashboard
+      </h1>
+    </header>
+
+    <div class="flex">
+      <!-- Sidebar -->
+      <nav class="bg-[#232744] text-white w-64 h-screen p-5">
+        <ul id="menu" class="space-y-4">
+          <li>
+            <button
+              id="studentBtn"
+              class="flex items-center w-full text-lg font-poppins font-semibold text-left p-2 rounded-2xl hover:bg-pink-400"
+              onclick="showContent('student')"
+            >
+              <i class="fas fa-user-graduate mr-2"></i>
+              Student
+            </button>
+          </li>
+          <li>
+            <button
+              id="instructorBtn"
+              class="flex items-center w-full text-lg font-poppins font-semibold text-left p-2 rounded-2xl hover:bg-pink-400"
+              onclick="showContent('instructor')"
+            >
+              <i class="fas fa-chalkboard-teacher mr-2"></i>
+              Instructor
+            </button>
+          </li>
+          <li>
+            <button
+              id="qnaBtn"
+              class="flex items-center w-full text-lg font-poppins font-semibold text-left p-2 rounded-2xl hover:bg-pink-400"
+              onclick="showContent('qna')"
+            >
+              <i class="fas fa-question-circle mr-2"></i>
+              Q&A
+            </button>
+          </li>
+          <li>
+            <button
+              id="courseBtn"
+              class="flex items-center w-full text-lg font-poppins font-semibold text-left p-2 rounded-2xl hover:bg-pink-400"
+              onclick="showContent('course')"
+            >
+              <i class="fas fa-book mr-2"></i>
+              Course
+            </button>
+          </li>
+          <li>
+            <button
+              id="resultBtn"
+              class="flex items-center w-full text-lg font-poppins font-semibold text-left p-2 rounded-2xl hover:bg-pink-400"
+              onclick="showContent('result')"
+            >
+              <i class="fas fa-clipboard-list mr-2"></i>
+              Result
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Content Area -->
+      <!-- Content Area -->
+      <main class="flex-1 p-10 rounded-tl-2xl bg-white">
+        <div id="student" class="hidden">
+        <div class="w-full max-w-6xl mx-auto bg-white shadow-md rounded-lg">
+            <div class="w-full max-w-5xl mx-auto bg-white shadow-md rounded-lg">
+                <div class="px-6 py-3 bg-gray-50 flex justify-between items-center">
+                    <button id="addStudentBtn" class="px-4 py-2 bg-green-500 text-white rounded-md">Add Student</button>
+                </div>
+                <div class="table-container">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student Name</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IC Number</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email ID</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Mobile No</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Birth</th>
+                                <th class="px-8 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Batch No</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-6 py-3 bg-gray-50 flex justify-between items-center">
+                    <button id="prevBtn" class="px-4 py-2 bg-blue-500 text-white rounded-md" disabled>Previous</button>
+                    <span id="pageInfo" class="text-sm text-gray-500"></span>
+                    <button id="nextBtn" class="px-4 py-2 bg-blue-500 text-white rounded-md">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup form -->
+    <div id="overlay" class="overlay"></div>
+    <div id="popupForm" class="popup">
+        <h2 class="text-lg font-semibold mb-4">Add Student</h2>
+        <form id="studentForm">
+            <div class="mb-4">
+                <label for="studentName" class="block text-sm font-medium text-gray-700">Student Name</label>
+                <input type="text" id="studentName" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="rollNumber" class="block text-sm font-medium text-gray-700">Roll Number</label>
+                <input type="text" id="rollNumber" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="course" class="block text-sm font-medium text-gray-700">Course</label>
+                <input type="text" id="course" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="icNumber" class="block text-sm font-medium text-gray-700">IC Number</label>
+                <input type="text" id="icNumber" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="emailID" class="block text-sm font-medium text-gray-700">Email ID</label>
+                <input type="email" id="emailID" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="mobileNo" class="block text-sm font-medium text-gray-700">Mobile No</label>
+                <input type="text" id="mobileNo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                <input type="date" id="dateOfBirth" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="batchNo" class="block text-sm font-medium text-gray-700">Batch No</label>
+                <input type="text" id="batchNo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="flex justify-end space-x-2">
+                <button type="button" id="cancelBtn" class="px-4 py-2 bg-gray-500 text-white rounded-md">Cancel</button>
+                <button type="submit" id="saveBtn" class="px-4 py-2 bg-green-500 text-white rounded-md">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Dummy data
+        const data = Array.from({ length: 10 }, (_, i) => ({
+            course: `Course ${i % 3 + 1}`,
+            rollNumber: `R${i + 1}`,
+            studentName: `Student ${i + 1}`,
+            icNumber: `IC${i + 1}`,
+            dateOfBirth: `2000-01-${i % 30 + 1}`,
+            emailID: `student${i + 1}@example.com`,
+            mobileNo: `123-456-78${i % 10}`,
+            batchNo: `B${i % 5 + 1}`,
+        }));
+
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        function renderTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const rows = data.slice(start, end).map(item => `
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.studentName}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.rollNumber}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.course}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.icNumber}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.emailID}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.mobileNo}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.dateOfBirth}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${item.batchNo}</td>
+                </tr>
+            `).join('');
+            document.querySelector('tbody').innerHTML = rows;
+            document.getElementById('pageInfo').textContent = `Page ${currentPage} of ${Math.ceil(data.length / rowsPerPage)}`;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === Math.ceil(data.length / rowsPerPage);
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable(currentPage);
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            if (currentPage < Math.ceil(data.length / rowsPerPage)) {
+                currentPage++;
+                renderTable(currentPage);
+            }
+        });
+
+        document.getElementById('addStudentBtn').addEventListener('click', () => {
+            document.getElementById('overlay').classList.add('active');
+            document.getElementById('popupForm').classList.add('active');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', () => {
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('popupForm').classList.remove('active');
+        });
+
+        document.getElementById('studentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const newStudent = {
+                studentName: document.getElementById('studentName').value,
+                rollNumber: document.getElementById('rollNumber').value,
+                course: document.getElementById('course').value,
+                icNumber: document.getElementById('icNumber').value,
+                emailID: document.getElementById('emailID').value,
+                mobileNo: document.getElementById('mobileNo').value,
+                dateOfBirth: document.getElementById('dateOfBirth').value,
+                batchNo: document.getElementById('batchNo').value,
+            };
+            data.push(newStudent);
+            renderTable(currentPage);
+            document.getElementById('overlay').classList.remove('active');
+            document.getElementById('popupForm').classList.remove('active');
+        });
+
+        renderTable(currentPage);
+    </script>
+        <div id="instructor" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">Instructor Information</h2>
+          <p>This is the content for the instructor section.</p>
+        </div>
+        <div id="qna" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">Q&A Section</h2>
+          <p>This is the content for the Q&A section.</p>
+        </div>
+        <div id="course" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">Course Information</h2>
+          <p>This is the content for the course section.</p>
+        </div>
+        <div id="result" class="hidden">
+          <h2 class="text-2xl font-semibold mb-4">Course Results</h2>
+          <p>This is the content for the result section.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function showContent(section) {
+        // Hide all sections
+        document
+          .querySelectorAll("main > div")
+          .forEach((div) => div.classList.add("hidden"));
+
+        // Remove background from all buttons
+        document.querySelectorAll("#menu button").forEach((btn) => {
+          btn.classList.remove("bg-pink-400", "text-black");
+          btn.classList.add("text-white");
+        });
+
+        // Show the selected section
+        document.getElementById(section).classList.remove("hidden");
+
+        // Highlight the active button
+        const selectedButton = document.getElementById(`${section}Btn`);
+        selectedButton.classList.add("bg-pink-400", "text-black");
+      }
+
+      // Default view
+      showContent("student");
+    </script>
+  </body>
+</html>

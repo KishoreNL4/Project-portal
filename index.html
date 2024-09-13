@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #000428,
+          #004e92
+        ); /* Dark blue gradient */
+        overflow: hidden; /* Prevent scrollbars */
+      }
+
+      .font-poppins {
+        font-family: "Poppins", sans-serif;
+      }
+      .card:hover .hover-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hover-text {
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+      }
+      .gradient-text {
+        font-size: 3rem; /* Adjust font size as needed */
+        font-weight: bold;
+        background: -webkit-linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For Chrome, Safari, and Opera */
+        background: linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For modern browsers */
+        -webkit-background-clip: text; /* Chrome, Safari, Opera */
+        background-clip: text; /* Standard */
+        color: transparent; /* Hide the original text color */
+        display: inline-block; /* Ensure it respects text sizing */
+      }
+    </style>
+    <!-- JavaScript for showing the dropdown -->
+    <script>
+      // Toggle Dropdown on Hover
+      const dropdownButton = document.querySelector(".inline-block");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+
+      dropdownButton.addEventListener("mouseover", () => {
+        dropdownMenu.classList.remove("hidden");
+      });
+
+      dropdownButton.addEventListener("mouseout", () => {
+        dropdownMenu.classList.add("hidden");
+      });
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="bg-gray-100 font-sans min-h-screen flex flex-col px-8 py-3">
+    <!-- Header -->
+    <div
+      class="w-full flex justify-between px-10 flex-row bg-white text-white p-4 rounded-lg text-center relative"
+    >
+      <div>
+        <h1 class="text-2xl text-black font-poppins mt-1">Assessment Portal</h1>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div
+      id="homePage"
+      class="flex-grow flex flex-col justify-center items-center"
+    >
+      <div class="text-center">
+        <h1
+          class="text-3xl font-bold tracking-wide mb-4 font-poppins gradient-text"
+        >
+          Welcome to the Portal
+        </h1>
+        <h1 class="text-xl text-white tracking-wider font-lg mb-8 font-poppins">
+          Institute Assessment Management and student, Instructor Database
+        </h1>
+        <div class="flex justify-center gap-8 mt-10">
+          <!-- Student Login -->
+          <div class="text-center">
+            <div
+              id="adminBtn"
+              class="card relative inline-block bg-[#e46947] rounded-lg shadow-md transition-transform duration-300"
+              style="width: 230px; height: 270px"
+            >
+              <img
+                src="images/admin1.png"
+                alt="Student Avatar"
+                class="card-image mx-auto object-cover"
+                style="width: 380px; height: 230px; margin-top: 55px"
+              />
+            </div>
+            <div
+              class="mt-2 font-poppins tracking-wide text-lg font-medium font-sans text-gray-400"
+            >
+              Admin Login
+            </div>
+          </div>
+
+          <!-- Instructor Login -->
+          <div class="text-center">
+            <div
+              id="instructorBtn"
+              class="card relative inline-block bg-yellow-300 rounded-lg shadow-md transition-transform duration-300"
+              style="width: 230px; height: 270px"
+            >
+              <img
+                src="images/instructor1.png"
+                alt="Student Avatar"
+                class="card-image mx-auto object-cover mt-2"
+                style="width: 380px; height: 300px"
+              />
+            </div>
+            <div
+              class="mt-2 font-poppins tracking-wide text-lg text-gray-400 font-medium font-sans text-gray-400"
+            >
+              Instructor Login
+            </div>
+          </div>
+          <!-- Admin Login -->
+          <div class="text-center">
+            <div
+              id="studentBtn"
+              class="card relative inline-block bg-[#a3dadd] rounded-lg shadow-md transition-transform duration-300"
+              style="width: 230px; height: 270px"
+            >
+              <img
+                src="images/student.png"
+                alt="Student Avatar"
+                class="card-image mx-auto object-cover"
+                style="width: 400px; height: 320px"
+              />
+            </div>
+            <div
+              class="mt-2 font-poppins tracking-wide text-gray-400 text-lg font-medium font-sans text-gray-400"
+            >
+              Student Login
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Login Popup -->
+    <div
+      id="adminLogin"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
+    >
+      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
+          Admin Login
+        </h2>
+        <h1 class="text-md font-sm font-poppins text-gray-500 mt-3">
+          Admin ID
+        </h1>
+        <input
+          type="text"
+          id="adminUsername"
+          placeholder="Admin ID"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
+
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Password"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <button
+          class="w-full mt-3 font-poppins rounded-3xl bg-[#e46947] text-white py-2 rounded hover:bg-orange-600"
+          onclick="login('admin')"
+          style="
+            background: #f12711; /* fallback for old browsers */
+            background: -webkit-linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          "
+        >
+          Login
+        </button>
+        <button
+          class="w-full font-poppins mt-4 bg-gray-500 rounded-3xl hover:bg-gray-600 text-white py-2 rounded bg-gray-600"
+          onclick="closePopup('adminLogin')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <!-- Instructor Login Popup -->
+    <div
+      id="instructorLogin"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
+    >
+      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
+          Instructor Login
+        </h2>
+        <h1 class="text-md font-sm font-poppins text-gray-500 mt-3">
+          Instructor ID
+        </h1>
+
+        <input
+          type="text"
+          id="instructorUsername"
+          placeholder="Instructor ID"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
+
+        <input
+          type="password"
+          id="instructorPassword"
+          placeholder="Password"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <button
+          class="w-full mt-3 font-poppins rounded-3xl text-white py-2 rounded bg-yellow-300 hover:bg-yellow-400"
+          onclick="login('instructor')"
+          style="
+            background: #f12711; /* fallback for old browsers */
+            background: -webkit-linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          "
+        >
+          Login
+        </button>
+        <button
+          class="w-full font-poppins mt-4 rounded-3xl bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+          onclick="closePopup('instructorLogin')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+    <!-- Student Login Popup -->
+    <div
+      id="studentLogin"
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
+    >
+      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
+          Student Login
+        </h2>
+        <h1 class="text-md font-sm font-poppins mt-3 text-gray-500">
+          Student ID
+        </h1>
+
+        <input
+          type="text"
+          id="studentUsername"
+          placeholder="Student ID"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
+
+        <input
+          type="password"
+          id="studentPassword"
+          placeholder="Password"
+          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        />
+        <button
+          class="w-full rounded-3xl mt-3 font-poppins bg-[#a3dadd] hover:bg-blue-400 text-white py-2 rounded"
+          onclick="login('student')"
+          style="
+            background: #f12711; /* fallback for old browsers */
+            background: -webkit-linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(
+              to right,
+              #f5af19,
+              #f12711
+            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          "
+        >
+          Login
+        </button>
+        <button
+          class="w-full rounded-3xl font-poppins mt-4 text-white bg-gray-500 py-2 rounded hover:bg-gray-600"
+          onclick="closePopup('studentLogin')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Dummy credentials
+      const credentials = {
+        student: { username: "student", password: "student123" },
+        instructor: { username: "instructor", password: "instructor123" },
+        admin: { username: "admin", password: "admin123" },
+      };
+
+      // Show login popup
+      document
+        .getElementById("studentBtn")
+        .addEventListener("click", function () {
+          document.getElementById("studentLogin").classList.remove("hidden");
+        });
+      document
+        .getElementById("instructorBtn")
+        .addEventListener("click", function () {
+          document.getElementById("instructorLogin").classList.remove("hidden");
+        });
+      document
+        .getElementById("adminBtn")
+        .addEventListener("click", function () {
+          document.getElementById("adminLogin").classList.remove("hidden");
+        });
+
+      // Close login popup
+      function closePopup(popupId) {
+        document.getElementById(popupId).classList.add("hidden");
+      }
+
+      // Login function with validation and redirection
+      function login(role) {
+        const username = document.getElementById(role + "Username").value;
+        const password = document.getElementById(role + "Password").value;
+
+        if (
+          username === credentials[role].username &&
+          password === credentials[role].password
+        ) {
+          closePopup(role + "Login");
+          document.getElementById("homePage").classList.add("hidden");
+
+          // Route to different dashboards based on the role
+          if (role === "admin") {
+            window.location.href = "adminDashboard.html";
+          } else if (role === "instructor") {
+            window.location.href = "instructorDashboard.html";
+          } else if (role === "student") {
+            window.location.href = "studentDashboard.html";
+          }
+        } else {
+          alert("Invalid credentials");
+        }
+      }
+
+      // Logout function
+      function logout() {
+        document
+          .querySelectorAll(".hidden")
+          .forEach((el) => el.classList.add("hidden"));
+        document.getElementById("homePage").classList.remove("hidden");
+        document
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+      }
+
+      document
+        .querySelector(".inline-block")
+        .addEventListener("mouseover", function () {
+          document.querySelector(".dropdown-menu").classList.remove("hidden");
+        });
+
+      document
+        .querySelector(".inline-block")
+        .addEventListener("mouseout", function () {
+          document.querySelector(".dropdown-menu").classList.add("hidden");
+        });
+    </script>
+  </body>
+</html>
