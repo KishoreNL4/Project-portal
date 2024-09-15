@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
     <style>
@@ -123,7 +125,7 @@
 
     <div class="flex">
       <!-- Sidebar -->
-    <nav class="bg-[#232744] text-white w-64 h-screen p-5">
+   <nav class="bg-[#232744] text-white w-64 h-screen p-5">
   <ul id="menu" class="space-y-4">
     <li>
       <button
@@ -131,7 +133,7 @@
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
         onclick="showContent('student')"
       >
-        <i class="fas fa-user-graduate mr-2"></i>
+        <i class="fas fa-user-graduate mr-5"></i>
         Student
       </button>
     </li>
@@ -141,7 +143,7 @@
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
         onclick="showContent('instructor')"
       >
-        <i class="fas fa-chalkboard-teacher mr-2"></i>
+        <i class="fas fa-chalkboard-teacher mr-5"></i>
         Instructor
       </button>
     </li>
@@ -151,52 +153,62 @@
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
         onclick="showContent('qna')"
       >
-        <i class="fas fa-question-circle mr-2"></i>
+        <i class="fas fa-question-circle mr-5"></i>
         Q&A
       </button>
     </li>
     <li>
       <button
-        id="courseBtn"
+        id="bookBtn"
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('addcourse')"
+        onclick="showContent('books')"
       >
-        <i class="fas fa-clipboard-list mr-2"></i>
+        <i class="fas fa-book mr-5"></i>
         Course
       </button>
     </li>
- 
-      <li>
+    <li>
       <button
         id="assignBtn"
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
         onclick="showContent('assign')"
       >
-        <i class="fas fa-clipboard-list mr-2"></i>
-        Assign Exam 
+        <i class="fas fa-calendar-check mr-5"></i>
+        Internal Exam
       </button>
     </li>
-       <li>
+    <li>
+      <button
+        id="finalBtn"
+        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
+        onclick="showContent('final')"
+      >
+        <i class="fas fa-calendar-alt mr-5"></i>
+        Final Exam
+      </button>
+    </li>
+    <li>
       <button
         id="resultBtn"
         class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
         onclick="showContent('result')"
       >
-        <i class="fas fa-clipboard-list mr-2"></i>
+        <i class="fas fa-chart-line mr-5"></i>
         Result
       </button>
     </li>
     <li>
       <button
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
+        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:text-white hover:bg-red-700"
         onclick="logout()"
       >
-        <i class="fas fa-sign-out-alt mr-2"></i>
+        <i class="fas fa-sign-out-alt mr-5"></i>
         LogOut
       </button>
     </li>
   </ul>
 </nav>
+
       <!-- Content Area -->
 
 <main class="flex-1 p-10 rounded-tl-2xl bg-white">
@@ -246,9 +258,13 @@
             <label for="rollNumber" class="block text-sm font-medium tracking-wider text-gray-700">Roll Number</label>
             <input type="text" id="rollNumber" placeholder="Roll Number" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm tracking-wider border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
         </div>
-        <div class="">
-            <label for="course" class="block text-sm font-medium tracking-wider text-gray-700">Course</label>
-            <input type="text" id="course" placeholder="Course" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 tracking-wider text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+           <div class="">
+            <label for="course" class="block text-sm font-medium tracking-wider text-gray-700">Course Name</label>
+            <select id="course" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
+                <option value="" disabled selected>Select Course</option>
+                <option value="Course 1">Course 1</option>
+                <option value="Course 2">Course 2</option>
+            </select>
         </div>
         <div class="">
             <label for="icNumber" class="block text-sm font-medium tracking-wider text-gray-700">IC Number</label>
@@ -311,8 +327,11 @@
         const end = start + studentRowsPerPage;
         const rows = studentData.slice(start, end).map(item => `
             <tr>
-                <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.studentName}</td>
-                <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.rollNumber}</td>
+   <td class="px-6 py-4 text-xs font-medium tracking-wider">
+                <a href="studentDetail.html?rollNumber=${encodeURIComponent(item.rollNumber)}" class="text-blue-500 hover:underline">
+                    ${item.studentName}
+                </a>
+            </td>              <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.rollNumber}</td>
                 <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.course}</td>
                 <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.icNumber}</td>
                 <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.emailID}</td>
@@ -441,9 +460,13 @@
             <label for="password" class="block text-sm font-medium tracking-wider text-gray-700">Password</label>
             <input type="text" id="password" placeholder="Password" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
         </div>
-        <div class="">
-            <label for="courseDetails" class="block text-sm font-medium tracking-wider text-gray-700">Course Details</label>
-            <input type="text" id="courseDetails" placeholder="Course Details" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+            <div class="">
+            <label for="courseDetails" class="block text-sm font-medium tracking-wider text-gray-700">Course Name</label>
+            <select id="courseDetails" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
+                <option value="" disabled selected>Select Course</option>
+                <option value="Course 1">Course 1</option>
+                <option value="Course 2">Course 2</option>
+            </select>
         </div>
         <div class="flex justify-end space-x-2 col-span-2">
 <button type="button" id="instructorCancelBtn" class="px-4 py-2 bg-gray-500 text-white tracking-wider text-sm rounded-md">Cancel</button>
@@ -584,177 +607,248 @@
 
 
  <!-- Q&A Management -->
-<div id="qna" class="hidden">
-    <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Question and Answer Management</p>
-        <button id="createNewSetBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Create New Set</button>
-    </div>
-    <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
-        <div class="table-container">
-            <table id="qnaTable" class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question Set</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created By</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Rows will be inserted here by JavaScript -->
-                </tbody>
-            </table>
+    <div id="qna" class="hidden">
+        <div class="py-3 flex justify-between items-center">
+            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Question and Answer Management</p>
+            <button id="createNewSetBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Create New Set</button>
         </div>
-    </div>
-</div>
-
-<!-- Popup form for Creating or Editing Q&A Sets -->
-<div id="qnaFormOverlay" class="overlay"></div>
-<div id="qnaPopupForm" class="popup" style="max-height: 80vh; overflow-y: auto;">
-    <h2 id="formTitle" class="text-xl font-semibold tracking-wider mb-4 px-3">Create New Question Set</h2>
-    <form id="qnaForm" class="grid grid-cols-2 gap-x-10 gap-y-2 px-3 mt-7">
-        <input type="hidden" id="qnaIndex" />
-        <div class="">
-            <label for="courseName" class="block text-sm font-medium tracking-wider text-gray-700">Course Name</label>
-            <select id="courseName" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
-                <option value="" disabled selected>Select Course</option>
-                <option value="Course 1">Course 1</option>
-                <option value="Course 2">Course 2</option>
-            </select>
-        </div>
-        <div class="">
-            <label for="questionSet" class="block text-sm font-medium tracking-wider text-gray-700">Question Set</label>
-            <select id="questionSet" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
-                <option value="" disabled selected>Select Set</option>
-                <option value="Set A">Set A</option>
-                <option value="Set B">Set B</option>
-                <option value="Set C">Set C</option>
-            </select>
-        </div>
-        <div class="">
-            <label for="uploadedImage" class="block text-sm font-medium tracking-wider text-gray-700">Upload Image/Video</label>
-            <input type="file" id="uploadedImage" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
-        </div>
-        <div class="col-span-2">
-            <div id="questionsContainer" class="w-full mb-4 px-3 py-3 ">
+        <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
+            <div class="table-container">
+                <table id="qnaTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course Name</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question Set</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created By</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
             </div>
-            <button type="button" id="addQuestionBtn" class="px-4 py-2 bg-blue-500 text-white text-sm font-medium tracking-wider rounded-md">Add Question</button>
         </div>
-        <div class="flex justify-end space-x-2 col-span-2">
-            <button type="button" id="qnaCancelBtn" class="px-4 py-2 bg-gray-500 text-white tracking-wider text-sm rounded-md">Cancel</button>
-            <button type="submit" id="saveBtn" class="px-4 py-2 bg-green-500 text-white tracking-wider text-sm rounded-md">Save</button>
-        </div>
-    </form>
-</div>
+    </div>
 
-<script>
-// Updated dummy data for Q&A sets
-const qnaData = [
-    {
-        courseName: 'Course 1',
-        questionSet: 'Set A',
-        createdBy: 'John Doe',
-        questions: [
-            { question: 'What is JavaScript?', answer: 'JavaScript is a programming language.' },
-            { question: 'What is a closure?', answer: 'A closure is a function that has access to its outer function scope.' }
-        ]
-    },
-    {
-        courseName: 'Course 2',
-        questionSet: 'Set B',
-        createdBy: 'Jane Smith',
-        questions: [
-            { question: 'What is React?', answer: 'React is a JavaScript library for building user interfaces.' },
-            { question: 'What is JSX?', answer: 'JSX is a syntax extension for JavaScript, used with React.' }
-        ]
-    },
-    // Add more dummy data as needed
-];
+    <!-- Popup form for Creating or Editing Q&A Sets -->
+    <div id="qnaFormOverlay" class="overlay"></div>
+    <div id="qnaPopupForm" class="popup">
+        <h2 id="formTitle" class="text-xl font-semibold tracking-wider mb-4 px-3">Create New Question Set</h2>
+        <form id="qnaForm" class="grid grid-cols-2 gap-x-10 gap-y-2 px-3 mt-7">
+            <input type="hidden" id="qnaIndex" />
+            <div class="">
+                <label for="courseName" class="block text-sm font-medium tracking-wider text-gray-700">Course Name</label>
+                <select id="courseName" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
+                    <option value="" disabled selected>Select Course</option>
+                    <option value="Course 1">Course 1</option>
+                    <option value="Course 2">Course 2</option>
+                </select>
+            </div>
+            <div class="">
+                <label for="questionSet" class="block text-sm font-medium tracking-wider text-gray-700">Question Set</label>
+                <select id="questionSet" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
+                    <option value="" disabled selected>Select Set</option>
+                    <option value="Set A">Set A</option>
+                    <option value="Set B">Set B</option>
+                    <option value="Set C">Set C</option>
+                </select>
+            </div>
+            <div class="">
+                <label for="uploadedImage" class="block text-sm font-medium tracking-wider text-gray-700">Upload Image/Video</label>
+                <input type="file" id="uploadedImage" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+            </div>
+            <div class="col-span-2">
+                <div id="questionsContainer" class="w-full mb-4 px-3 py-3 "></div>
+                <button type="button" id="addQuestionBtn" class="px-4 py-2 bg-blue-500 text-white text-sm font-medium tracking-wider rounded-md">Add Question</button>
+            </div>
+            <div class="flex justify-end space-x-2 col-span-2">
+                <button type="button" id="qnaCancelBtn" class="px-4 py-2 bg-gray-500 text-white tracking-wider text-sm rounded-md">Cancel</button>
+                <button type="submit" id="saveBtn" class="px-4 py-2 bg-green-500 text-white tracking-wider text-sm rounded-md">Save</button>
+            </div>
+        </form>
+    </div>
 
-function renderQnaTable() {
-    const rows = qnaData.map((item, index) => `
-        <tr>
-            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.courseName}</td>
-            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.questionSet}</td>
-            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.createdBy}</td>
-            <td class="px-6 py-4 text-xs font-medium tracking-wider">
-                <button class="editQnaBtn bg-blue-500 text-white px-2 py-1 text-xs rounded" data-index="${index}">Edit</button>
-            </td>
-        </tr>
-    `).join('');
-    document.querySelector('#qnaTable tbody').innerHTML = rows;
+    <script>
+        // Updated dummy data for Q&A sets
+        const qnaData = [
+            {
+                courseName: 'Course 1',
+                questionSet: 'Set A',
+                createdBy: 'John Doe',
+                questions: [
+                    { question: 'What is JavaScript?', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], correctAnswer: 0 },
+                    { question: 'What is a closure?', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], correctAnswer: 1 }
+                ]
+            },
+            {
+                courseName: 'Course 2',
+                questionSet: 'Set B',
+                createdBy: 'Jane Smith',
+                questions: [
+                    { question: 'What is React?', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], correctAnswer: 2 },
+                    { question: 'What is JSX?', options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'], correctAnswer: 3 }
+                ]
+            },
+            // Add more dummy data as needed
+        ];
 
-    // Attach edit event to buttons
-    document.querySelectorAll('.editQnaBtn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = e.target.getAttribute('data-index');
-            openEditQnaPopup(index);
+        function renderQnaTable() {
+            const rows = qnaData.map((item, index) => `
+                <tr>
+                    <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.courseName}</td>
+                    <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.questionSet}</td>
+                    <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.createdBy}</td>
+                    <td class="px-6 py-4 text-xs font-medium tracking-wider">
+                        <button class="editQnaBtn bg-blue-500 text-white px-2 py-1 text-xs rounded" data-index="${index}">Edit</button>
+                    </td>
+                </tr>
+            `).join('');
+            document.querySelector('#qnaTable tbody').innerHTML = rows;
+
+            document.querySelectorAll('.editQnaBtn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    openEditQnaPopup(index);
+                });
+            });
+        }
+
+        document.getElementById('createNewSetBtn').addEventListener('click', () => {
+            document.getElementById('formTitle').textContent = 'Create New Question Set';
+            document.getElementById('qnaForm').reset();
+            document.getElementById('qnaIndex').value = '';
+            document.getElementById('questionsContainer').innerHTML = ''; // Clear questions container
+            document.getElementById('qnaFormOverlay').classList.add('active');
+            document.getElementById('qnaPopupForm').classList.add('active');
         });
-    });
-}
 
-document.getElementById('createNewSetBtn').addEventListener('click', () => {
-    document.getElementById('formTitle').textContent = 'Create New Question Set';
-    document.getElementById('qnaForm').reset();
-    document.getElementById('qnaIndex').value = '';
-    document.getElementById('questionsContainer').innerHTML = ''; // Clear questions container
-    document.getElementById('qnaFormOverlay').classList.add('active');
-    document.getElementById('qnaPopupForm').classList.add('active');
-});
+        document.getElementById('qnaCancelBtn').addEventListener('click', () => {
+            closeQnaPopup();
+        });
 
-document.getElementById('qnaCancelBtn').addEventListener('click', () => {
-    closeQnaPopup();
-});
+        function closeQnaPopup() {
+            document.getElementById('qnaFormOverlay').classList.remove('active');
+            document.getElementById('qnaPopupForm').classList.remove('active');
+        }
 
-function closeQnaPopup() {
-    document.getElementById('qnaFormOverlay').classList.remove('active');
-    document.getElementById('qnaPopupForm').classList.remove('active');
-}
+        function openEditQnaPopup(index) {
+            const qna = qnaData[index];
+            document.getElementById('formTitle').textContent = 'Edit Question Set';
+            document.getElementById('qnaIndex').value = index;
+            document.getElementById('courseName').value = qna.courseName;
+            document.getElementById('questionSet').value = qna.questionSet;
 
-function openEditQnaPopup(index) {
-    const qna = qnaData[index];
-    document.getElementById('formTitle').textContent = 'Edit Question Set';
-    document.getElementById('qnaIndex').value = index;
-    document.getElementById('courseName').value = qna.courseName;
-    document.getElementById('questionSet').value = qna.questionSet;
+            const questionsContainer = document.getElementById('questionsContainer');
+            questionsContainer.innerHTML = '';
 
-    // Clear previous questions in the container
-    const questionsContainer = document.getElementById('questionsContainer');
-    questionsContainer.innerHTML = '';
+            qna.questions.forEach((q, i) => {
+                const questionHTML = `
+                    <div class="mb-6 border p-4 rounded-lg shadow">
+                        <label class="block text-sm font-medium tracking-wider text-gray-700">Question ${i + 1}</label>
+                        <input type="text" class="w-full mb-2 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" value="${q.question}" />
 
-    // Populate questions and answers
-    qna.questions.forEach((q, i) => {
-        const questionHTML = `
-            <div class="mb-4">
-                <label class="block text-sm font-medium tracking-wider text-gray-700">Question ${i + 1}</label>
-                <input type="text" class="w-full mb-1 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" value="${q.question}" placeholder="Enter question" />
-                <textarea class="w-full mb-1 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" placeholder="Enter answer">${q.answer}</textarea>
-            </div>
-        `;
-        questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
-    });
+                        <div class="mt-4">
+                            <label class="block text-sm font-medium tracking-wider text-gray-700 mb-1">Options</label>
+                            <div class="grid grid-cols-1 gap-3">
+                                ${q.options.map((option, j) => `
+                                    <div class="flex items-center">
+                                        <input type="radio" name="correctAnswer${i + 1}" ${j === q.correctAnswer ? 'checked' : ''} class="mr-2" />
+                                        <input type="text" placeholder="Option ${j + 1}" class="w-full px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" value="${option}" />
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
+            });
 
-    // Show the popup
-    document.getElementById('qnaPopupForm').classList.add('active');
-    document.getElementById('qnaFormOverlay').classList.add('active');
-}
+            document.getElementById('qnaFormOverlay').classList.add('active');
+            document.getElementById('qnaPopupForm').classList.add('active');
+        }
 
-document.getElementById('addQuestionBtn').addEventListener('click', () => {
-    const questionsContainer = document.getElementById('questionsContainer');
-    const questionIndex = questionsContainer.childElementCount + 1;
-    const questionHTML = `
-        <div class="mb-4">
-            <label class="block text-sm font-medium tracking-wider text-gray-700">Question ${questionIndex}</label>
-            <input type="text" class="w-full mb-1 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" placeholder="Enter question" />
-            <textarea class="w-full mb-1 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" placeholder="Enter answer"></textarea>
-        </div>
-    `;
-    questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
-});
+        document.getElementById('addQuestionBtn').addEventListener('click', () => {
+            const questionsContainer = document.getElementById('questionsContainer');
+            const newQuestionIndex = questionsContainer.children.length + 1;
+            const questionHTML = `
+                <div class="mb-6 border p-4 rounded-lg shadow">
+                    <label class="block text-sm font-medium tracking-wider text-gray-700">Question ${newQuestionIndex}</label>
+                    <input type="text" class="w-full mb-2 px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" placeholder="Enter question" />
 
-// Initial render
-renderQnaTable();
-</script>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium tracking-wider text-gray-700 mb-1">Options</label>
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="flex items-center">
+                                <input type="radio" name="correctAnswer${newQuestionIndex}" class="mr-2" />
+                                <input type="text" placeholder="Option 1" class="w-full px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" name="correctAnswer${newQuestionIndex}" class="mr-2" />
+                                <input type="text" placeholder="Option 2" class="w-full px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" name="correctAnswer${newQuestionIndex}" class="mr-2" />
+                                <input type="text" placeholder="Option 3" class="w-full px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" name="correctAnswer${newQuestionIndex}" class="mr-2" />
+                                <input type="text" placeholder="Option 4" class="w-full px-3 py-2 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            questionsContainer.insertAdjacentHTML('beforeend', questionHTML);
+        });
+
+        document.getElementById('qnaForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const index = document.getElementById('qnaIndex').value;
+            const courseName = document.getElementById('courseName').value;
+            const questionSet = document.getElementById('questionSet').value;
+            const questionsContainer = document.getElementById('questionsContainer');
+
+            const questions = Array.from(questionsContainer.querySelectorAll('.mb-6')).map((questionEl, i) => {
+                const questionText = questionEl.querySelector('input[type="text"]').value;
+
+                const options = Array.from(questionEl.querySelectorAll('input[type="text"]'))
+                    .filter((optionInput, j) => j !== 0) // Exclude the first input field which is the question itself
+                    .map(optionInput => optionInput.value);
+
+                const correctAnswerIndex = Array.from(questionEl.querySelectorAll('input[type="radio"]'))
+                    .findIndex(radio => radio.checked);
+
+                return {
+                    question: questionText,
+                    options,
+                    correctAnswer: correctAnswerIndex,
+                };
+            });
+
+            if (index === '') {
+                qnaData.push({
+                    courseName,
+                    questionSet,
+                    createdBy: 'User',
+                    questions,
+                });
+            } else {
+                qnaData[index] = {
+                    courseName,
+                    questionSet,
+                    createdBy: 'User',
+                    questions,
+                };
+            }
+
+            closeQnaPopup();
+            renderQnaTable();
+        });
+
+        // Initial rendering of the Q&A table
+        renderQnaTable();
+    </script>
 <!-- Q&A Management -->
 
 
@@ -763,7 +857,7 @@ renderQnaTable();
 
 
    <!-- course -->
-<div id="addcourse" class="hidden">
+<div id="books" class="hidden">
     <div class="py-3 flex justify-between items-center">
         <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course Management</p>
         <button id="createNewCourseBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Create New Course</button>
@@ -779,6 +873,8 @@ renderQnaTable();
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass Percentage</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Files</th>
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Edit</th>
                     </tr>
                 </thead>
@@ -823,13 +919,23 @@ renderQnaTable();
                 <option value="inactive">Inactive</option>
             </select>
         </div>
+        <div class="col-span-2">
+            <label for="passPercentage" class="block text-sm font-medium tracking-wider text-gray-700">Pass Percentage</label>
+            <input type="number" id="passPercentage" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" placeholder="Enter Pass Percentage" />
+        </div>
+        <div class="col-span-2">
+            <label for="courseFiles" class="block text-sm font-medium tracking-wider text-gray-700">Upload Files</label>
+            <input type="file" id="courseFiles" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" multiple />
+        </div>
         <div class="flex justify-end space-x-2 col-span-2">
             <button type="button" id="courseCancelBtn" class="px-4 py-2 bg-gray-500 text-white tracking-wider text-sm rounded-md">Cancel</button>
             <button type="submit" id="saveCourseBtn" class="px-4 py-2 bg-green-500 text-white tracking-wider text-sm rounded-md">Save</button>
         </div>
     </form>
 </div>
-<script>// Updated dummy data for Courses
+
+<script>
+// Updated dummy data for Courses
 const courseData = [
     {
         courseName: 'Course 1',
@@ -837,7 +943,9 @@ const courseData = [
         instructorName: 'John Doe',
         startDate: '2024-01-01',
         endDate: '2024-12-31',
-        status: 'active'
+        status: 'active',
+        passPercentage: 60,
+        files: []
     },
     {
         courseName: 'Course 2',
@@ -845,10 +953,17 @@ const courseData = [
         instructorName: '',
         startDate: '2024-02-01',
         endDate: '2024-11-30',
-        status: 'inactive'
-    },
-    // Add more dummy data as needed
+        status: 'inactive',
+        passPercentage: 50,
+        files: []
+    }
 ];
+
+// Function to render file links
+function renderFileLinks(files) {
+    if (files.length === 0) return 'No files uploaded';
+    return files.map(file => `<a href="${file}" target="_blank" class="text-blue-500">File</a>`).join(', ');
+}
 
 function renderCourseTable() {
     const rows = courseData.map((item, index) => `
@@ -859,42 +974,67 @@ function renderCourseTable() {
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.startDate}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.endDate}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.passPercentage}%</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${renderFileLinks(item.files)}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">
-                <button class="editCourseBtn bg-blue-500 text-white px-2 py-1 text-xs rounded" data-index="${index}">Edit</button>
+                <button class="text-xs bg-blue-500 text-white px-4 py-1 rounded-md tracking-wider" onclick="editCourse(${index})">Edit</button>
             </td>
         </tr>
     `).join('');
     document.querySelector('#courseTable tbody').innerHTML = rows;
-
-    // Attach edit event to buttons
-    document.querySelectorAll('.editCourseBtn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = e.target.getAttribute('data-index');
-            openEditCoursePopup(index);
-        });
-    });
 }
 
+// Call the function to initially render the table
+renderCourseTable();
+
+// Logic for handling course creation and editing
 document.getElementById('createNewCourseBtn').addEventListener('click', () => {
-    document.getElementById('formTitle').textContent = 'Create New Course';
-    document.getElementById('courseForm').reset();
     document.getElementById('courseIndex').value = '';
-    document.getElementById('courseFormOverlay').classList.add('active');
-    document.getElementById('coursePopupForm').classList.add('active');
+    document.getElementById('courseForm').reset();
+    document.getElementById('coursePopupForm').style.display = 'block';
 });
 
 document.getElementById('courseCancelBtn').addEventListener('click', () => {
-    closeCoursePopup();
+    document.getElementById('coursePopupForm').style.display = 'none';
 });
 
-function closeCoursePopup() {
-    document.getElementById('courseFormOverlay').classList.remove('active');
-    document.getElementById('coursePopupForm').classList.remove('active');
-}
+document.getElementById('courseForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const courseName = document.getElementById('courseName').value;
+    const courseRegNo = document.getElementById('courseRegNo').value;
+    const instructorName = document.getElementById('instructorName').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const status = document.getElementById('courseStatus').value;
+    const passPercentage = document.getElementById('passPercentage').value;
+    const filesInput = document.getElementById('courseFiles');
+    const files = Array.from(filesInput.files).map(file => URL.createObjectURL(file));
 
-function openEditCoursePopup(index) {
+    const newCourse = {
+        courseName,
+        courseRegNo,
+        instructorName,
+        startDate,
+        endDate,
+        status,
+        passPercentage,
+        files
+    };
+
+    const courseIndex = document.getElementById('courseIndex').value;
+    if (courseIndex !== '') {
+        courseData[courseIndex] = newCourse;
+    } else {
+        courseData.push(newCourse);
+    }
+
+    renderCourseTable();
+    document.getElementById('coursePopupForm').style.display = 'none';
+});
+
+function editCourse(index) {
     const course = courseData[index];
-    document.getElementById('formTitle').textContent = 'Edit Course';
     document.getElementById('courseIndex').value = index;
     document.getElementById('courseName').value = course.courseName;
     document.getElementById('courseRegNo').value = course.courseRegNo;
@@ -902,37 +1042,13 @@ function openEditCoursePopup(index) {
     document.getElementById('startDate').value = course.startDate;
     document.getElementById('endDate').value = course.endDate;
     document.getElementById('courseStatus').value = course.status;
+    document.getElementById('passPercentage').value = course.passPercentage;
+    document.getElementById('courseFiles').value = ''; // Reset file input, as files cannot be pre-filled
 
-    // Show the popup
-    document.getElementById('coursePopupForm').classList.add('active');
-    document.getElementById('courseFormOverlay').classList.add('active');
+    document.getElementById('coursePopupForm').style.display = 'block';
 }
-
-document.getElementById('courseForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const index = document.getElementById('courseIndex').value;
-    const course = {
-        courseName: document.getElementById('courseName').value,
-        courseRegNo: document.getElementById('courseRegNo').value,
-        instructorName: document.getElementById('instructorName').value,
-        startDate: document.getElementById('startDate').value,
-        endDate: document.getElementById('endDate').value,
-        status: document.getElementById('courseStatus').value
-    };
-
-    if (index !== '') {
-        courseData[index] = course; // Update existing course
-    } else {
-        courseData.push(course); // Add new course
-    }
-
-    closeCoursePopup();
-    renderCourseTable();
-});
-
-// Initial render
-renderCourseTable();
 </script>
+
      <!-- course -->
 
 
@@ -942,36 +1058,79 @@ renderCourseTable();
 
        <!-- result -->
 <div id="result" class="hidden">
+    <!-- Tabs -->
     <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Student Results Management</p>
-        <button id="importFileBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Import File</button>
+        <div class="flex space-x-4">
+            <button id="internalTab" class="tab-btn px-4 py-2 text-white text-sm font-medium tracking-wider rounded-md">Internal Results</button>
+            <button id="finalTab" class="tab-btn px-4 py-2 text-white text-sm font-medium tracking-wider rounded-md">Final Results</button>
+        </div>
     </div>
-    <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
-        <div class="table-container">
-            <table id="resultsTable" class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question Set</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Exam</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
-                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass/Fail</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Rows will be inserted here by JavaScript -->
-                </tbody>
-            </table>
+
+    <!-- Internal Results Section -->
+    <div id="internalResults" class="tab-content hidden">
+        <div class="py-3 flex justify-between items-center">
+            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Internal Results Management</p>
+            <button id="importInternalFileBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Import Internal File</button>
+        </div>
+        <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
+            <div class="table-container">
+                <table id="internalResultsTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question Set</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Exam</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass/Fail</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Results Section -->
+    <div id="finalResults" class="tab-content hidden">
+        <div class="py-3 flex justify-between items-center">
+            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Final Results Management</p>
+            <button id="importFinalFileBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Import Final File</button>
+        </div>
+        <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
+            <div class="table-container">
+                <table id="finalResultsTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Question Set</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date of Exam</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Percentage</th>
+                            <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass/Fail</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- File input for importing Excel data -->
-<input type="file" id="fileInput" class="hidden" accept=".xlsx, .xls" />
+<!-- File inputs for importing Excel data -->
+<input type="file" id="internalFileInput" class="hidden" accept=".xlsx, .xls" />
+<input type="file" id="finalFileInput" class="hidden" accept=".xlsx, .xls" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.8/xlsx.full.min.js"></script>
 <script>
-const resultsData = [
+const internalResultsData = [
+    // Dummy data for internal results
     {
         rollNumber: '12345',
         name: 'Alice Smith',
@@ -993,8 +1152,31 @@ const resultsData = [
     // Add more dummy data as needed
 ];
 
-function renderResultsTable() {
-    const rows = resultsData.map(item => `
+const finalResultsData = [
+    // Dummy data for final results
+    {
+        rollNumber: '54321',
+        name: 'Charlie Brown',
+        course: 'History',
+        questionSet: 'Set C',
+        dateOfExam: '2024-07-01',
+        percentage: 78,
+        status: 'pass'
+    },
+    {
+        rollNumber: '09876',
+        name: 'Diana Green',
+        course: 'Biology',
+        questionSet: 'Set A',
+        dateOfExam: '2024-07-10',
+        percentage: 62,
+        status: 'pass'
+    },
+    // Add more dummy data as needed
+];
+
+function renderResultsTable(tableId, data) {
+    const rows = data.map(item => `
         <tr>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.rollNumber}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.name}</td>
@@ -1007,21 +1189,49 @@ function renderResultsTable() {
             </td>
         </tr>
     `).join('');
-    document.querySelector('#resultsTable tbody').innerHTML = rows;
+    document.querySelector(`#${tableId} tbody`).innerHTML = rows;
 }
 
-document.getElementById('importFileBtn').addEventListener('click', () => {
-    document.getElementById('fileInput').click();
+function handleTabClick(tabId, sectionId, tableId, data) {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-500', 'text-white');
+        btn.classList.add('bg-gray-500', 'text-white');
+    });
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+    
+    document.getElementById(tabId).classList.remove('bg-gray-500');
+    document.getElementById(tabId).classList.add('bg-blue-500');
+    
+    document.getElementById(sectionId).classList.remove('hidden');
+    renderResultsTable(tableId, data);
+}
+
+document.getElementById('internalTab').addEventListener('click', () => handleTabClick('internalTab', 'internalResults', 'internalResultsTable', internalResultsData));
+document.getElementById('finalTab').addEventListener('click', () => handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData));
+
+document.getElementById('importInternalFileBtn').addEventListener('click', () => {
+    document.getElementById('internalFileInput').click();
 });
 
-document.getElementById('fileInput').addEventListener('change', (e) => {
+document.getElementById('importFinalFileBtn').addEventListener('click', () => {
+    document.getElementById('finalFileInput').click();
+});
+
+document.getElementById('internalFileInput').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (file) {
-        readExcelFile(file);
+        readExcelFile(file, internalResultsData, 'internalResultsTable');
     }
 });
 
-function readExcelFile(file) {
+document.getElementById('finalFileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        readExcelFile(file, finalResultsData, 'finalResultsTable');
+    }
+});
+
+function readExcelFile(file, dataArray, tableId) {
     const reader = new FileReader();
     reader.onload = function (event) {
         const data = event.target.result;
@@ -1030,16 +1240,18 @@ function readExcelFile(file) {
         const worksheet = workbook.Sheets[sheetName];
         const json = XLSX.utils.sheet_to_json(worksheet);
 
-        resultsData.length = 0; // Clear existing data
-        resultsData.push(...json); // Add new data
-        renderResultsTable();
+        dataArray.length = 0; // Clear existing data
+        dataArray.push(...json); // Add new data
+        renderResultsTable(tableId, dataArray);
     };
     reader.readAsBinaryString(file);
 }
 
 // Initial render
-renderResultsTable();
+handleTabClick('internalTab', 'internalResults', 'internalResultsTable', internalResultsData);
 </script>
+
+
 
 
 
@@ -1050,6 +1262,7 @@ renderResultsTable();
   <!-- result -->
 
 <!-- Table for Exam Management -->
+ <!-- Internal exam assign -->
 <div id="assign" class="hidden">
     <div class="py-3 flex justify-between items-center">
         <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
@@ -1066,6 +1279,8 @@ renderResultsTable();
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Set</th>
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Date</th>
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Time</th>
+                                                <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass Percentage</th>
+
                         <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assign Exam</th>
                     </tr>
                 </thead>
@@ -1116,7 +1331,8 @@ const assignExamDetails = [
         email: 'alice@example.com',
         examSet: '',
         examDate: '',
-        examTime: ''
+        examTime: '',
+          passPercentage: '40%'
     },
     {
         rollNumber: '002',
@@ -1125,7 +1341,8 @@ const assignExamDetails = [
         email: 'bob@example.com',
         examSet: '',
         examDate: '',
-        examTime: ''
+        examTime: '',
+             passPercentage: '50%'
     },
     // Add more dummy data as needed
 ];
@@ -1140,6 +1357,8 @@ function renderExamTable() {
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examSet || 'N/A'}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examDate || 'N/A'}</td>
             <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examTime || 'N/A'}</td>
+                        <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.passPercentage}</td>
+
             <td class="px-6 py-4 text-xs font-medium tracking-wider">
                 <button class="assignExamBtn bg-blue-500 text-white px-2 py-1 text-xs rounded" data-index="${index}">Assign Exam</button>
             </td>
@@ -1195,6 +1414,169 @@ document.getElementById('assignExamForm').addEventListener('submit', (e) => {
 // Initial render
 renderExamTable();
 </script>
+ <!-- Internal exam assign -->
+
+
+
+
+
+  <!-- final exam assign -->
+
+
+<div id="final" class="hidden">
+    <div class="py-3 flex justify-between items-center">
+        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
+    </div>
+    <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
+        <div class="table-container">
+            <table id="finalexam-examTable" class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll Number</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Set</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Date</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Exam Time</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass Percentage</th>
+                        <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assign Exam</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <!-- Rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Popup form for Assigning Exam -->
+<div id="finalexam-assignExamOverlay" class="overlay"></div>
+<div id="finalexam-assignExamPopup" class="popup" style="max-height: 80vh; overflow-y: auto;">
+    <h2 class="text-xl font-semibold tracking-wider mb-4 px-3">Assign Exam</h2>
+    <form id="finalexam-assignExamForm" class="grid grid-cols-2 gap-x-10 gap-y-2 px-3 mt-7">
+        <input type="hidden" id="finalexam-examIndex" />
+        <div class="">
+            <label for="finalexam-examSet" class="block text-sm font-medium tracking-wider text-gray-700">Exam Set</label>
+            <select id="finalexam-examSet" class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out">
+                <option value="setA">Set A</option>
+                <option value="setB">Set B</option>
+                <option value="setC">Set C</option>
+            </select>
+        </div>
+        <div class="">
+            <label for="finalexam-examDate" class="block text-sm font-medium tracking-wider text-gray-700">Date of Exam</label>
+            <input type="date" id="finalexam-examDate" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+        </div>
+        <div class="">
+            <label for="finalexam-examTime" class="block text-sm font-medium tracking-wider text-gray-700">Exam Timing</label>
+            <input type="time" id="finalexam-examTime" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" />
+        </div>
+        <!-- <div class="">
+            <label for="finalexam-passPercentage" class="block text-sm font-medium tracking-wider text-gray-700">Pass Percentage</label>
+            <input type="number" id="finalexam-passPercentage" class="w-full mb-4 px-3 py-3 text-sm border tracking-wider border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out" min="0" max="100" placeholder="Enter pass percentage" />
+        </div> -->
+        <div class="flex justify-end space-x-2 col-span-2">
+            <button type="button" id="finalexam-assignExamCancelBtn" class="px-4 py-2 bg-gray-500 text-white tracking-wider text-sm rounded-md">Cancel</button>
+            <button type="submit" id="finalexam-assignExamSaveBtn" class="px-4 py-2 bg-green-500 text-white tracking-wider text-sm rounded-md">Set Exam</button>
+        </div>
+    </form>
+</div>
+
+<script>
+// Dummy data for Assign Exam Details
+const assignfinalExamDetails = [
+    {
+        rollNumber: '001',
+        name: 'Alice',
+        course: 'Course 1',
+        email: 'alice@example.com',
+        examSet: '',
+        examDate: '',
+        examTime: '',
+        passPercentage: '40%'
+    },
+    {
+        rollNumber: '002',
+        name: 'Bob',
+        course: 'Course 2',
+        email: 'bob@example.com',
+        examSet: '',
+        examDate: '',
+        examTime: '',
+        passPercentage: '50%'
+    },
+    // Add more dummy data as needed
+];
+
+function renderExamTable() {
+    const rows = assignfinalExamDetails.map((item, index) => `
+        <tr>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.rollNumber}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.name}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.course}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.email}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examSet || 'N/A'}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examDate || 'N/A'}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.examTime || 'N/A'}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">${item.passPercentage}</td>
+            <td class="px-6 py-4 text-xs font-medium tracking-wider">
+                <button class="finalexam-assignExamBtn bg-blue-500 text-white px-2 py-1 text-xs rounded" data-index="${index}">Assign Exam</button>
+            </td>
+        </tr>
+    `).join('');
+    document.querySelector('#finalexam-examTable tbody').innerHTML = rows;
+
+    // Attach the event listener using event delegation
+    document.querySelector('#finalexam-examTable tbody').addEventListener('click', (e) => {
+        if (e.target.classList.contains('finalexam-assignExamBtn')) {
+            const index = e.target.getAttribute('data-index');
+            openAssignExamPopup(index);
+        }
+    });
+}
+
+function openAssignExamPopup(index) {
+    const examDetail = assignfinalExamDetails[index];
+    document.getElementById('finalexam-examIndex').value = index;
+    document.getElementById('finalexam-examSet').value = examDetail.examSet;
+    document.getElementById('finalexam-examDate').value = examDetail.examDate;
+    document.getElementById('finalexam-examTime').value = examDetail.examTime;
+
+    // Show the popup
+    document.getElementById('finalexam-assignExamPopup').classList.add('active');
+    document.getElementById('finalexam-assignExamOverlay').classList.add('active');
+}
+
+document.getElementById('finalexam-assignExamCancelBtn').addEventListener('click', () => {
+    closeAssignExamPopup();
+});
+
+function closeAssignExamPopup() {
+    document.getElementById('finalexam-assignExamOverlay').classList.remove('active');
+    document.getElementById('finalexam-assignExamPopup').classList.remove('active');
+}
+
+document.getElementById('finalexam-assignExamForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const index = document.getElementById('finalexam-examIndex').value;
+    const examDetail = assignfinalExamDetails[index];
+
+    examDetail.examSet = document.getElementById('finalexam-examSet').value;
+    examDetail.examDate = document.getElementById('finalexam-examDate').value;
+    examDetail.examTime = document.getElementById('finalexam-examTime').value;
+
+    renderExamTable();
+    closeAssignExamPopup();
+});
+
+// Initialize the table on page load
+renderExamTable();
+</script>
+
+
+   <!-- final exam assign -->
 
 
 

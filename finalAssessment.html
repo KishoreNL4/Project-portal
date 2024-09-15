@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Final Assessment</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .gradient-text {
+        font-size: 3rem; /* Adjust font size as needed */
+        font-weight: bold;
+        background: -webkit-linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For Chrome, Safari, and Opera */
+        background: linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For modern browsers */
+        -webkit-background-clip: text; /* Chrome, Safari, Opera */
+        background-clip: text; /* Standard */
+        color: transparent; /* Hide the original text color */
+        display: inline-block; /* Ensure it respects text sizing */
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #232744;
+        color: white;
+        padding: 1rem;
+      }
+      .header h1 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        padding: 0.5rem 0.5rem;
+        letter-spacing: 0.1em;
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+      }
+      .profile img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-left: 1rem;
+        object-fit: cover;
+      }
+      .profile span {
+        margin-left: 0.5rem;
+      }
+      .option-container {
+        background-color: #f9fafb;
+        padding: 0.75rem;
+        border-radius: 0.375rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        margin-bottom: 0.5rem;
+      }
+      .submit-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f9fafb;
+      }
+      .submit-btn {
+        width: 100%;
+        max-width: 400px;
+      }
+      .countdown {
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #ff5722;
+      }
+      .relative {
+        position: relative;
+      }
+
+      .absolute {
+        position: absolute;
+      }
+
+      .top-0 {
+        top: 0;
+      }
+
+      .right-0 {
+        right: 0;
+      }
+
+      .p-2 {
+        padding: 0.5rem;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="gradient-text tracking-wide">Course Name</h1>
+      <div class="profile">
+        <a
+          id="closeTest"
+          href="#"
+          class="tracking-wide text-orange-400 text-sm font-semibold cursor-pointer"
+          >Close Test</a
+        >
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-auto mx-auto p-4">
+      <!-- Description Section -->
+      <div class="p-6 mb-4 relative">
+        <p class="text-lg font-semibold tracking-wide">
+          Welcome to the online exam. Please read the instructions carefully:
+        </p>
+        <p class="list-disc tracking-wider mt-2">
+          Ensure you have a stable internet connection. Read each question
+          carefully before answering. You can navigate between questions using
+          the 'Previous' and 'Next' buttons. Once you start, the timer will
+          begin, so manage your time efficiently.
+        </p>
+        <p class="mt-2 text-sm text-gray-600">
+          Number of Questions: 30<br />
+          Duration: 45 minutes
+        </p>
+        <div class="countdown absolute top-0 right-0 p-2" id="timer">45:00</div>
+      </div>
+
+      <!-- Question Section -->
+      <div id="questionSection" class="bg-white p-6 rounded shadow-md mb-4">
+        <p id="questionText" class="text-xl mb-4 tracking-wide">
+          What is the capital of France?
+        </p>
+        <div id="options" class="space-y-2">
+          <!-- Options will be dynamically populated here -->
+        </div>
+      </div>
+
+      <!-- Question Navigation -->
+      <div class="flex justify-between items-center mt-10">
+        <button
+          id="prevBtn"
+          class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300 tracking-wide"
+          disabled
+        >
+          Previous
+        </button>
+        <div class="flex justify-center">
+          <span id="questionNum" class="text-lg font-semibold tracking-wide"
+            >1 of 3</span
+          >
+        </div>
+        <div id="nextOrSubmitContainer" class="flex justify-center">
+          <button
+            id="nextBtn"
+            class="bg-blue-500 text-white px-4 py-2 rounded tracking-wide"
+          >
+            Next
+          </button>
+          <button
+            id="submitBtn"
+            class="bg-green-500 text-white px-6 py-2 rounded tracking-wide hidden"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+      const questions = [
+        {
+          text: "What is the capital of France?",
+          options: ["Paris", "London", "Berlin", "Madrid"],
+        },
+        {
+          text: "Which planet is known as the Red Planet?",
+          options: ["Earth", "Mars", "Jupiter", "Saturn"],
+        },
+        {
+          text: "What is the largest ocean on Earth?",
+          options: [
+            "Atlantic Ocean",
+            "Indian Ocean",
+            "Arctic Ocean",
+            "Pacific Ocean",
+          ],
+        },
+      ];
+
+      let currentQuestion = 0;
+      const totalDuration = 45 * 60; // 45 minutes in seconds
+      let timeRemaining = totalDuration;
+
+      function updateQuestion() {
+        const question = questions[currentQuestion];
+        document.getElementById("questionText").innerText = question.text;
+        const options = document.getElementById("options");
+        options.innerHTML = question.options
+          .map(
+            (opt, index) => ` 
+              <div class="option-container">
+                <label class="block tracking-wide">
+                  <input type="radio" name="answer" value="${index}" class="mr-2">
+                  <span>${opt}</span>
+                </label>
+              </div>
+            `
+          )
+          .join("");
+        document.getElementById("questionNum").innerText = `${
+          currentQuestion + 1
+        } of ${questions.length}`;
+        document.getElementById("prevBtn").disabled = currentQuestion === 0;
+        document.getElementById("nextBtn").disabled =
+          currentQuestion === questions.length - 1;
+        document
+          .getElementById("submitBtn")
+          .classList.toggle("hidden", currentQuestion < questions.length - 1);
+        document
+          .getElementById("nextBtn")
+          .classList.toggle("hidden", currentQuestion === questions.length - 1);
+      }
+
+      function updateTimer() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById("timer").innerText = `${String(
+          minutes
+        ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+        if (timeRemaining > 0) {
+          timeRemaining--;
+        } else {
+          alert("Time is up!");
+          document.getElementById("submitBtn").click();
+        }
+      }
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        if (currentQuestion > 0) {
+          currentQuestion--;
+          updateQuestion();
+        }
+      });
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        if (currentQuestion < questions.length - 1) {
+          currentQuestion++;
+          updateQuestion();
+        }
+      });
+
+      document.getElementById("submitBtn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to submit the test?")) {
+          alert("Completed");
+          window.location.href = "/"; // Navigate back to the previous page
+        }
+      });
+
+      document.getElementById("closeTest").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (confirm("Do you want to exit from the test?")) {
+          window.location.href = "/"; // Navigate back to the previous page
+        }
+      });
+
+      // Start the timer when the page loads
+      setInterval(updateTimer, 1000);
+      updateQuestion();
+    </script>
+  </body>
+</html>

@@ -51,6 +51,51 @@
         color: transparent; /* Hide the original text color */
         display: inline-block; /* Ensure it respects text sizing */
       }
+      /* Dark Theme with Accents */
+      .dark-theme {
+        background: rgba(0, 0, 0, 1); /* Dark background with opacity */
+        color: #ffffff; /* White text */
+        border-radius: 12px; /* Rounded corners */
+        border: 1px solid #333333; /* Dark border */
+      }
+
+      .dark-theme input {
+        background: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Semi-transparent input background */
+        color: #ffffff; /* White text */
+      }
+
+      .dark-theme button {
+        background: #1e90ff; /* Bright blue background for buttons */
+        color: #ffffff; /* White text for buttons */
+        border: none; /* Remove border */
+      }
+
+      .dark-theme button:hover {
+        background: #1c86ee; /* Darker blue on hover */
+      }
+
+      .dark-theme .cancel-button {
+        background: #444; /* Dark gray for cancel button */
+      }
+
+      .dark-theme .cancel-button:hover {
+        background: #555; /* Darker gray on hover */
+      }
+
+      .dark-theme .dropdown {
+        background: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Semi-transparent dropdown background */
+        color: #ffffff; /* White text */
+      }
     </style>
     <!-- JavaScript for showing the dropdown -->
     <script>
@@ -160,160 +205,126 @@
     </div>
 
     <!-- Admin Login Popup -->
+    <!-- Admin Login Popup -->
     <div
       id="adminLogin"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
     >
-      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
-        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
-          Admin Login
-        </h2>
-        <h1 class="text-md font-sm font-poppins text-gray-500 mt-3">
-          Admin ID
-        </h1>
+      <div class="dark-theme p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins">Admin Login</h2>
+        <h1 class="text-md font-sm font-poppins">Admin ID</h1>
         <input
           type="text"
           id="adminUsername"
           placeholder="Admin ID"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
-        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
-
+        <h1 class="text-md font-sm font-poppins">Password</h1>
         <input
           type="password"
           id="adminPassword"
           placeholder="Password"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
+
         <button
-          class="w-full mt-3 font-poppins rounded-3xl bg-[#e46947] text-white py-2 rounded hover:bg-orange-600"
+          class="w-full mt-3 rounded-3xl font-poppins py-2"
           onclick="login('admin')"
-          style="
-            background: #f12711; /* fallback for old browsers */
-            background: -webkit-linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          "
         >
           Login
         </button>
         <button
-          class="w-full font-poppins mt-4 bg-gray-500 rounded-3xl hover:bg-gray-600 text-white py-2 rounded bg-gray-600"
+          class="w-full mt-4 rounded-3xl font-poppins cancel-button py-2"
           onclick="closePopup('adminLogin')"
         >
           Cancel
         </button>
       </div>
     </div>
+
     <!-- Instructor Login Popup -->
     <div
       id="instructorLogin"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
     >
-      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
-        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
-          Instructor Login
-        </h2>
-        <h1 class="text-md font-sm font-poppins text-gray-500 mt-3">
-          Instructor ID
-        </h1>
-
+      <div class="dark-theme p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins">Instructor Login</h2>
+        <h1 class="text-md font-sm font-poppins">Instructor ID</h1>
         <input
           type="text"
           id="instructorUsername"
           placeholder="Instructor ID"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
-        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
-
+        <h1 class="text-md font-sm font-poppins">Password</h1>
         <input
           type="password"
           id="instructorPassword"
           placeholder="Password"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
+        <h1 class="text-md font-sm font-poppins mt-3">Course</h1>
+        <select
+          id="instructorCourse"
+          class="dropdown w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        >
+          <option value="course1" class="text-black">Course 1</option>
+          <option value="course2" class="text-black">Course 2</option>
+          <option value="course3" class="text-black">Course 3</option>
+        </select>
         <button
-          class="w-full mt-3 font-poppins rounded-3xl text-white py-2 rounded bg-yellow-300 hover:bg-yellow-400"
+          class="w-full mt-3 rounded-3xl font-poppins py-2"
           onclick="login('instructor')"
-          style="
-            background: #f12711; /* fallback for old browsers */
-            background: -webkit-linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          "
         >
           Login
         </button>
         <button
-          class="w-full font-poppins mt-4 rounded-3xl bg-gray-500 text-white py-2 rounded hover:bg-gray-600"
+          class="w-full mt-4 rounded-3xl font-poppins cancel-button py-2"
           onclick="closePopup('instructorLogin')"
         >
           Cancel
         </button>
       </div>
     </div>
+
     <!-- Student Login Popup -->
     <div
       id="studentLogin"
       class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden z-10"
     >
-      <div class="bg-white p-8 rounded-lg shadow-lg w-[430px]">
-        <h2 class="text-3xl font-bold mb-4 font-poppins gradient-text">
-          Student Login
-        </h2>
-        <h1 class="text-md font-sm font-poppins mt-3 text-gray-500">
-          Student ID
-        </h1>
-
+      <div class="dark-theme p-8 rounded-lg shadow-lg w-[430px]">
+        <h2 class="text-3xl font-bold mb-4 font-poppins">Student Login</h2>
+        <h1 class="text-md font-sm font-poppins">Student ID</h1>
         <input
           type="text"
           id="studentUsername"
           placeholder="Student ID"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
-        <h1 class="text-md font-sm font-poppins text-gray-500">Password</h1>
-
+        <h1 class="text-md font-sm font-poppins">Password</h1>
         <input
           type="password"
           id="studentPassword"
           placeholder="Password"
-          class="w-full mb-4 px-3 bg-[#fafafa] mt-1 py-3 text-sm border border-gray-300 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+          class="w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
         />
+        <h1 class="text-md font-sm font-poppins mt-3">Course</h1>
+        <select
+          id="studentCourse"
+          class="dropdown w-full mb-4 px-3 py-3 text-sm border border-gray-600 shadow focus:outline-none focus:ring-gray-500 focus:border-gray-500 transition duration-200 ease-in-out"
+        >
+          <option value="course1" class="text-black">Course 1</option>
+          <option value="course2" class="text-black">Course 2</option>
+          <option value="course3" class="text-black">Course 3</option>
+        </select>
         <button
-          class="w-full rounded-3xl mt-3 font-poppins bg-[#a3dadd] hover:bg-blue-400 text-white py-2 rounded"
+          class="w-full mt-3 rounded-3xl font-poppins py-2"
           onclick="login('student')"
-          style="
-            background: #f12711; /* fallback for old browsers */
-            background: -webkit-linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(
-              to right,
-              #f5af19,
-              #f12711
-            ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          "
         >
           Login
         </button>
         <button
-          class="w-full rounded-3xl font-poppins mt-4 text-white bg-gray-500 py-2 rounded hover:bg-gray-600"
+          class="w-full mt-4 rounded-3xl font-poppins cancel-button py-2"
           onclick="closePopup('studentLogin')"
         >
           Cancel

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+      <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+    <style>
+      .gradient-text {
+        font-size: 3rem; /* Adjust font size as needed */
+        font-weight: bold;
+        background: -webkit-linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For Chrome, Safari, and Opera */
+        background: linear-gradient(
+          to right,
+          #f5af19,
+          #f12711
+        ); /* For modern browsers */
+        -webkit-background-clip: text; /* Chrome, Safari, Opera */
+        background-clip: text; /* Standard */
+        color: transparent; /* Hide the original text color */
+        display: inline-block; /* Ensure it respects text sizing */
+      }
+       .table-container {
+            max-height: 440px; /* Adjust based on your needs */
+            overflow-y: auto;
+        }
+         .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);           
+            border-radius: 8px;
+            z-index: 1000;
+            padding: 20px;
+            width: 700px;
+            border-radius: 8px;
+        }
+        .grid {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 20px;
+        }
+        .mb-4 {
+           margin-bottom: 1rem;
+       }
+        .popup.active {
+            display: block;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #232744;
+            color: white;
+            padding: 1rem;
+    }
+       .header h1 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            padding: 0.5rem 0.5rem;
+            letter-spacing: 0.1em;
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+    .profile img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      margin-left: 1rem;
+      object-fit: cover;
+    }
+    .profile span {
+      margin-left: 0.5rem;
+    }
+    
+
+    </style>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  </head>
+<body class="bg-gray-100 ">
+    <header class="header">
+    <h1 class="gradient-text">Student Profile</h1>
+    <div class="profile">
+      <span class="tracking-wide text-orange-400 text-sm font-semibold">John Doe</span>
+      <img src="./images/logo.png" alt="Profile Logo">
+    </div>
+  </header>
+
+  <div class="py-10">
+    <div class="w-full bg-gray-100 px-20   ">
+  <div class="max-w-full mx-auto bg-white flex flex-row space-x-10 shadow-lg rounded-lg py-6 px-3 overflow-hidden">
+    <!-- Profile Image and Edit Icon -->
+    <!-- <div class="bg-gray-200 h-32"></div> -->
+    <div class="relative flex items-center justify-center">
+      <img id="profileImage" class="w-40 h-40 ml-10 rounded-full border-4 border-white cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" alt="Profile Image">
+      <!-- Edit Icon -->
+    <button id="editProfile" class="absolute right-2 bottom-5 bg-orange-400 p-2 rounded-full text-white hover:text-white flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+        <path d="M12 20h9" />
+        <path d="M16.5 3.5l4 4-12 12-4 1 1-4 12-12z" />
+    </svg>
+</button>
+
+
+    </div>
+    <!-- Profile Info -->
+    <div class="text-left px-6 py-4">
+      <h2 class="text-2xl font-semibold tracking-wide text-gray-800">John Doe</h2>
+      <p class="text-gray-600 tracking-wide">Roll Number: 12345</p>
+      <p class="text-gray-600 tracking-wide">Batch No: 2023</p>
+      <p class="text-gray-600 tracking-wide">IC Number: A1234567</p>
+      <p class="text-gray-600 tracking-wide">Phone Number: +1 234 567 890</p>
+      <p class="text-gray-600 tracking-wide">Email: johndoe@example.com</p>
+    </div>
+  </div>
+</div>
+
+<p class="px-20 py-2 mt-10 text-left text-md font-medium text-gray-800 uppercase tracking-wider">About</p>
+<div class="flex flex-row px-20   space-x-7">
+    <div class="bg-white flex flex-col w-[237px] rounded-md">
+        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >4</p>
+        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Ongoing Course</p>
+    </div>
+       <div class="bg-white flex flex-col w-[237px] rounded-md">
+        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >20</p>
+        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">completed Course</p>
+    </div> 
+       <div class="bg-white flex flex-col w-[237px] rounded-md">
+        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >10</p>
+        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Certificate</p>
+    </div>
+    
+       <div onclick="showContent('result')" class="bg-white flex flex-col w-[237px] rounded-md cursor-pointer">
+        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >2</p>
+        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Result</p>
+    </div>
+</div>
+<!-- about -->
+           
+<!-- course -->
+<p class="px-2 py-4 px-20 mt-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course</p>
+<div class=" px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="w-[325px] bg-white p-4 shadow-lg">
+  <!-- Profile Image -->
+  <img id="profileImage" class="w-full h-40 object-cover mx-auto border-4 border-white cursor-pointer" 
+       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" 
+       alt="Profile Image">
+  
+  <!-- Course Title -->
+  <p class="px-2 py-4 text-left text-sm font-medium text-gray-800 uppercase tracking-wider">
+    Course on Artificial Intelligence
+  </p>
+  
+  <!-- Progress Bar and Course Info -->
+  <div class="px-2">
+    <div class="flex justify-between text-sm font-medium text-gray-600">
+      <span>5 hours course</span> <!-- Replace with actual course duration -->
+      <span>50% Completed</span> <!-- Replace with actual progress -->
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+      <div class="bg-orange-500 h-2.5 rounded-full" style="width: 50%;"></div> <!-- Adjust width based on completion -->
+    </div>
+  </div>
+
+  <!-- Start Course Button -->
+
+</div>
+
+ <div class="w-[325px] bg-white p-4 shadow-lg">
+
+   
+  <!-- Profile Image -->
+  <img id="profileImage" class="w-full h-40 object-cover mx-auto border-4 border-white cursor-pointer" 
+       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" 
+       alt="Profile Image">
+  
+  <!-- Course Title -->
+  <p class="px-2 py-4 text-left text-sm font-medium text-gray-800 uppercase tracking-wider">
+    Course on HTML and Css
+  </p>
+  
+  <!-- Progress Bar and Course Info -->
+  <div class="px-2">
+    <div class="flex justify-between text-sm font-medium text-gray-600">
+      <span>2 hours course</span> <!-- Replace with actual course duration -->
+      <span>0% Completed</span> <!-- Replace with actual progress -->
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+      <div class="bg-orange-500 h-2.5 rounded-full" style="width: 0%;"></div> <!-- Adjust width based on completion -->
+    </div>
+  </div>
+
+  <!-- Start Course Button -->
+
+</div>
+   <div class="w-[325px] bg-white p-4 shadow-lg">
+  <!-- Profile Image -->
+  <img id="profileImage" class="w-full h-40 object-cover mx-auto border-4 border-white cursor-pointer" 
+       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" 
+       alt="Profile Image">
+  
+  <!-- Course Title -->
+  <p class="px-2 py-4 text-left text-sm font-medium text-gray-800 uppercase tracking-wider">
+    Course on Prompting
+  </p>
+  
+  <!-- Progress Bar and Course Info -->
+  <div class="px-2">
+    <div class="flex justify-between text-sm font-medium text-gray-600">
+      <span>2 hours course</span> <!-- Replace with actual course duration -->
+      <span>0% Completed</span> <!-- Replace with actual progress -->
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+      <div class="bg-orange-500 h-2.5 rounded-full" style="width: 0%;"></div> <!-- Adjust width based on completion -->
+    </div>
+  </div>
+
+  <!-- Start Course Button -->
+
+</div>
+
+</div>
+  </div>
+</body>
+</html>
