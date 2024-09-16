@@ -9,24 +9,26 @@
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
     <style>
-      .gradient-text {
-        font-size: 3rem; /* Adjust font size as needed */
-        font-weight: bold;
-        background: -webkit-linear-gradient(
-          to right,
-          #f5af19,
-          #f12711
-        ); /* For Chrome, Safari, and Opera */
-        background: linear-gradient(
-          to right,
-          #f5af19,
-          #f12711
-        ); /* For modern browsers */
-        -webkit-background-clip: text; /* Chrome, Safari, Opera */
-        background-clip: text; /* Standard */
-        color: transparent; /* Hide the original text color */
-        display: inline-block; /* Ensure it respects text sizing */
-      }
+          .gradient-text {
+      background: linear-gradient(to top, #4CAF50, #2196F3);
+    }
+    .gradient-background {
+      background: linear-gradient(to top, #4CAF50, #2196F3);
+    }
+    .hidden {
+      display: none;
+    }
+    #menu button {
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #menu button:hover {
+      background-color: white;
+      color: black;
+    }
+    #menu button.bg-white {
+      background-color: white;
+      color: black;
+    }
        .table-container {
             max-height: 440px; /* Adjust based on your needs */
             overflow-y: auto;
@@ -73,16 +75,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #232744;
+            background-color: #ffffff;
+             opacity: 20px;
             color: white;
             padding: 1rem;
     }
        .header h1 {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: bold;
             padding: 0.5rem 0.5rem;
             letter-spacing: 0.1em;
-            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            background: linear-gradient(90deg, #4CAF50, #2196F3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -115,107 +118,116 @@
   </head>
   <body class="bg-gray-100">
     <!-- Header -->
-   <header class="header">
-    <h1 class="gradient-text">Admin Dashboard</h1>
-    <div class="profile">
-      <span class="tracking-wide text-orange-400 text-sm font-semibold">John Doe</span>
-      <img src="./images/logo.png" alt="Profile Logo">
-    </div>
-  </header>
+
 
     <div class="flex">
       <!-- Sidebar -->
-   <nav class="bg-[#232744] text-white w-64 h-screen p-5">
-  <ul id="menu" class="space-y-4">
-    <li>
-      <button
-        id="studentBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('student')"
-      >
-        <i class="fas fa-user-graduate mr-5"></i>
-        Student
-      </button>
-    </li>
-    <li>
-      <button
-        id="instructorBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('instructor')"
-      >
-        <i class="fas fa-chalkboard-teacher mr-5"></i>
-        Instructor
-      </button>
-    </li>
-    <li>
-      <button
-        id="qnaBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('qna')"
-      >
-        <i class="fas fa-question-circle mr-5"></i>
-        Q&A
-      </button>
-    </li>
-    <li>
-      <button
-        id="bookBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('books')"
-      >
-        <i class="fas fa-book mr-5"></i>
-        Course
-      </button>
-    </li>
-    <li>
-      <button
-        id="assignBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('assign')"
-      >
-        <i class="fas fa-calendar-check mr-5"></i>
-        Internal Exam
-      </button>
-    </li>
-    <li>
-      <button
-        id="finalBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('final')"
-      >
-        <i class="fas fa-calendar-alt mr-5"></i>
-        Final Exam
-      </button>
-    </li>
-    <li>
-      <button
-        id="resultBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('result')"
-      >
-        <i class="fas fa-chart-line mr-5"></i>
-        Result
-      </button>
-    </li>
-    <li>
-      <button
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:text-white hover:bg-red-700"
-        onclick="logout()"
-      >
-        <i class="fas fa-sign-out-alt mr-5"></i>
-        LogOut
-      </button>
-    </li>
-  </ul>
-</nav>
+     <nav class="gradient-background text-white w-64 h-screen p-5">
+          <div class="mb-10">
+           <img
+                src="images/Ptc-logo.png"
+                alt="Student Avatar"
+                class="card-image mx-auto object-contain"
+                style="width: 150px; height: 57px;"
+              />
+    </div>
+    <ul id="menu" class="space-y-4">
+      <li>
+        <button
+          id="studentBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('student')"
+        >
+          <i class="fas fa-user-graduate mr-5"></i>
+          Student
+        </button>
+      </li>
+      <li>
+        <button
+          id="instructorBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('instructor')"
+        >
+          <i class="fas fa-chalkboard-teacher mr-5"></i>
+          Instructor
+        </button>
+      </li>
+      <li>
+        <button
+          id="qnaBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('qna')"
+        >
+          <i class="fas fa-question-circle mr-5"></i>
+          Q&A
+        </button>
+      </li>
+      <li>
+        <button
+          id="bookBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('books')"
+        >
+          <i class="fas fa-book mr-5"></i>
+          Course
+        </button>
+      </li>
+      <li>
+        <button
+          id="assignBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('assign')"
+        >
+          <i class="fas fa-calendar-check mr-5"></i>
+          Internal Exam
+        </button>
+      </li>
+      <li>
+        <button
+          id="finalBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('final')"
+        >
+          <i class="fas fa-calendar-alt mr-5"></i>
+          Final Exam
+        </button>
+      </li>
+      <li>
+        <button
+          id="resultBtn"
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-white"
+          onclick="showContent('result')"
+        >
+          <i class="fas fa-chart-line mr-5"></i>
+          Result
+        </button>
+      </li>
+      <li>
+        <button
+          class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:text-white hover:bg-red-700"
+          onclick="logout()"
+        >
+          <i class="fas fa-sign-out-alt mr-5"></i>
+          LogOut
+        </button>
+      </li>
+    </ul>
+  </nav>
 
       <!-- Content Area -->
 
-<main class="flex-1 p-10 rounded-tl-2xl bg-white">
+<main class="flex-1 rounded-tl-2xl bg-[#e2e7ec]">
+     <header class="header">
+            <h1 class="gradient-text">Admin Dashboard</h1>
+    <div class="profile">
+      <span class="tracking-wide text-blue-400 text-sm font-semibold">John Doe</span>
+      <img src="./images/logo.png" alt="Profile Logo">
+    </div>
+  </header>
           <!-- student -->  
- <div id="student" class="hidden">
+ <div id="student" class="hidden p-8">
     <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">List of Students</p>
+        <p class="px-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">List of Students</p>
         <button id="addStudentBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Add Student</button>
     </div>
     <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -403,9 +415,9 @@
 
 
     <!-- instructor -->
-<div id="instructor" class="hidden">
+<div id="instructor" class="hidden p-8">
     <div class=" py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">List of Instructor</p>
+        <p class="px-6 text-left text-md font-medium text-gray-800 uppercase tracking-wider">List of Instructor</p>
         <button id="addInstructorBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Add Instructor</button>
     </div>
     <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -607,9 +619,9 @@
 
 
  <!-- Q&A Management -->
-    <div id="qna" class="hidden">
+    <div id="qna" class="hidden p-8">
         <div class="py-3 flex justify-between items-center">
-            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Question and Answer Management</p>
+            <p class="px-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Question and Answer Management</p>
             <button id="createNewSetBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Create New Set</button>
         </div>
         <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -857,9 +869,9 @@
 
 
    <!-- course -->
-<div id="books" class="hidden">
+<div id="books" class="hidden p-8">
     <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course Management</p>
+        <p class="px-6 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course Management</p>
         <button id="createNewCourseBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Create New Course</button>
     </div>
     <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -1057,9 +1069,9 @@ function editCourse(index) {
 
 
        <!-- result -->
-<div id="result" class="hidden">
+<div id="result" class="hidden p-8">
     <!-- Tabs -->
-    <div class="py-3 flex justify-between items-center">
+    <div class="flex justify-between items-center px-7 ">
         <div class="flex space-x-4">
             <button id="internalTab" class="tab-btn px-4 py-2 text-white text-sm font-medium tracking-wider rounded-md">Internal Results</button>
             <button id="finalTab" class="tab-btn px-4 py-2 text-white text-sm font-medium tracking-wider rounded-md">Final Results</button>
@@ -1067,9 +1079,9 @@ function editCourse(index) {
     </div>
 
     <!-- Internal Results Section -->
-    <div id="internalResults" class="tab-content hidden">
-        <div class="py-3 flex justify-between items-center">
-            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Internal Results Management</p>
+    <div id="internalResults" class="tab-content hidden mt-3">
+        <div class=" flex py-3 justify-between items-center">
+            <p class="px-6  text-left text-md font-medium text-gray-800 uppercase tracking-wider">Internal Results Management</p>
             <button id="importInternalFileBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Import Internal File</button>
         </div>
         <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -1095,9 +1107,9 @@ function editCourse(index) {
     </div>
 
     <!-- Final Results Section -->
-    <div id="finalResults" class="tab-content hidden">
-        <div class="py-3 flex justify-between items-center">
-            <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Final Results Management</p>
+    <div id="finalResults" class="tab-content hidden mt-3 ">
+        <div class=" px-4 py-3 flex justify-between items-center">
+            <p class="px-2  text-left text-md font-medium text-gray-800 uppercase tracking-wider">Final Results Management</p>
             <button id="importFinalFileBtn" class="px-4 py-2 bg-orange-500 text-white text-sm font-medium tracking-wider rounded-md">Import Final File</button>
         </div>
         <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
@@ -1263,9 +1275,9 @@ handleTabClick('internalTab', 'internalResults', 'internalResultsTable', interna
 
 <!-- Table for Exam Management -->
  <!-- Internal exam assign -->
-<div id="assign" class="hidden">
+<div id="assign" class="hidden p-8">
     <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
+        <p class="px-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
     </div>
     <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
         <div class="table-container">
@@ -1423,9 +1435,9 @@ renderExamTable();
   <!-- final exam assign -->
 
 
-<div id="final" class="hidden">
+<div id="final" class="hidden p-8">
     <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
+        <p class="px-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Exam Management</p>
     </div>
     <div class="w-full max-w-[1000px] mx-auto bg-white shadow-md rounded-lg">
         <div class="table-container">
@@ -1589,25 +1601,25 @@ renderExamTable();
   }
 
   function showContent(section) {
-    // Hide all sections
-    document.querySelectorAll("main > div").forEach((div) => div.classList.add("hidden"));
+      // Hide all sections
+      document.querySelectorAll("main > div").forEach((div) => div.classList.add("hidden"));
 
-    // Remove background and text color from all buttons
-    document.querySelectorAll("#menu button").forEach((btn) => {
-      btn.classList.remove("bg-orange-400", "text-black");
-      btn.classList.add("text-white");
-    });
+      // Remove background and text color from all buttons
+      document.querySelectorAll("#menu button").forEach((btn) => {
+        btn.classList.remove("bg-white", "text-black");
+        btn.classList.add("text-white");
+      });
 
-    // Show the selected section
-    document.getElementById(section).classList.remove("hidden");
+      // Show the selected section
+      document.getElementById(section).classList.remove("hidden");
 
-    // Highlight the active button
-    const selectedButton = document.getElementById(`${section}Btn`);
-    selectedButton.classList.add("bg-orange-400", "text-black");
-  }
+      // Highlight the active button
+      const selectedButton = document.getElementById(`${section}Btn`);
+      selectedButton.classList.add("bg-white", "text-black");
+    }
 
-  // Default view
-  showContent("student");
+    // Default view
+    showContent("student");
 </script>
   </body>
 </html>

@@ -10,24 +10,29 @@
 </head>
     <style>
 
-      .gradient-text {
-        font-size: 3rem; /* Adjust font size as needed */
-        font-weight: bold;
-        background: -webkit-linear-gradient(
-          to right,
-          #f5af19,
-          #f12711
-        ); /* For Chrome, Safari, and Opera */
-        background: linear-gradient(
-          to right,
-          #f5af19,
-          #f12711
-        ); /* For modern browsers */
-        -webkit-background-clip: text; /* Chrome, Safari, Opera */
-        background-clip: text; /* Standard */
-        color: transparent; /* Hide the original text color */
-        display: inline-block; /* Ensure it respects text sizing */
-      }
+          .gradient-text {
+      background: linear-gradient(to top, #4CAF50, #2196F3);
+    }
+        .gradient-background {
+      background: linear-gradient(to top, #4CAF50, #2196F3);
+    }
+    .hidden {
+      display: none;
+    }
+   .hidden {
+      display: none;
+    }
+    #menu button {
+      transition: background-color 0.3s, color 0.3s;
+    }
+    #menu button:hover {
+      background-color: white;
+      color: black;
+    }
+    #menu button.bg-orange-400 {
+      background-color: orange;
+      color: black;
+    }
        .table-container {
             max-height: 440px; /* Adjust based on your needs */
             overflow-y: auto;
@@ -74,16 +79,17 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #232744;
+            background-color: #ffffff;
+            opacity: 20px;
             color: white;
             padding: 1rem;
     }
        .header h1 {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-weight: bold;
             padding: 0.5rem 0.5rem;
             letter-spacing: 0.1em;
-            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            background: linear-gradient(90deg, #4CAF50, #2196F3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -167,17 +173,19 @@
   </head>
   <body class="bg-gray-100">
     <!-- Header -->
-   <header class="header">
-    <h1 class="gradient-text">Student Dashboard</h1>
-    <div class="profile">
-      <span class="tracking-wide text-orange-400 text-sm font-semibold">John Doe</span>
-      <img src="./images/logo.png" alt="Profile Logo">
-    </div>
-  </header>
+
 
     <div class="flex">
       <!-- Sidebar -->
-   <nav class="bg-[#232744] text-white w-64 h-screen p-5">
+   <nav class="gradient-background text-white w-64 h-screen p-5 ">
+    <div class="mb-10">
+           <img
+                src="images/Ptc-logo.png"
+                alt="Student Avatar"
+                class="card-image mx-auto object-contain"
+                style="width: 150px; height: 57px;"
+              />
+    </div>
   <ul id="menu" class="space-y-4">
     <li>
       <button
@@ -199,36 +207,7 @@
         Materials
       </button>
     </li>
-    <!-- <li>
-      <button
-        id="instructorBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('instructor')"
-      >
-        <i class="fas fa-chalkboard-teacher mr-5"></i>
-        Instructor
-      </button>
-    </li> -->
-    <!-- <li>
-      <button
-        id="qnaBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('qna')"
-      >
-        <i class="fas fa-question-circle mr-5"></i>
-        Materials
-      </button>
-    </li> -->
-    <!-- <li>
-      <button
-        id="bookBtn"
-        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
-        onclick="showContent('books')"
-      >
-        <i class="fas fa-book mr-5"></i>
-        Course
-      </button>
-    </li> -->
+
     <li>
       <button
         id="assignBtn"
@@ -273,9 +252,15 @@
 
       <!-- Content Area -->
 
-<main class="flex-1 p-10 rounded-tl-2xl bg-gray-100">
-          <!-- student -->  
-<div id="student" class="hidden">
+<main class="flex-1 rounded-tl-2xl bg-[#e2e7ec]">
+            <header class="header">
+    <h1 class="gradient-text">Student Dashboard</h1>
+    <div class="profile">
+      <span class="tracking-wide text-blue-400 text-sm font-semibold">John Doe</span>
+      <img src="./images/logo.png" alt="Profile Logo">
+    </div>
+  </header> <!-- student -->  
+<div id="student" class="hidden p-8">
   <!-- Main Container -->
   <div class="w-full bg-gray-100">
     <div class="max-w-full mx-auto bg-white flex flex-row space-x-10 shadow-lg rounded-lg py-6 px-3 overflow-hidden">
@@ -480,8 +465,8 @@
 
 
 <!-- material -->
-    <div id="material" class="hidden">
-<p class="px-2   text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course</p>
+    <div id="material" class="hidden p-8">
+<p class="px-2 py-2  text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course</p>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <div class="w-[325px] bg-white p-4 shadow-lg">
   <!-- Profile Image -->
@@ -681,7 +666,7 @@
 
 
        <!-- result -->
-<div id="result">
+<div id="result" class="p-8">
     <!-- Tabs -->
     <div class="py-3 flex justify-between items-center">
         <div class="flex space-x-4">
@@ -873,9 +858,9 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
 
 <!-- Table for Exam Management -->
  <!-- Internal exam assign -->
-<div id="assign" class="hidden">
+<div id="assign" class="hidden p-8">
     <div class="flex justify-between items-center">
-        <p class="px-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">
+        <p class="px-2 py-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">
             Take Internal Test
         </p>
     </div>
@@ -921,9 +906,9 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
   <!-- final exam assign -->
 
 
-<div id="final" class="hidden">
+<div id="final" class="hidden p-8">
     <div class=" flex justify-between items-center">
-        <p class="px-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Take Final Exam</p>
+        <p class="px-2 py-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Take Final Exam</p>
     </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="w-[325px] bg-white p-4 shadow-lg">
@@ -975,7 +960,7 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
 
     // Remove background and text color from all buttons
     document.querySelectorAll("#menu button").forEach((btn) => {
-      btn.classList.remove("bg-orange-400", "text-black");
+        btn.classList.remove("bg-white", "text-black");
       btn.classList.add("text-white");
     });
 
@@ -984,7 +969,7 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
 
     // Highlight the active button
     const selectedButton = document.getElementById(`${section}Btn`);
-    selectedButton.classList.add("bg-orange-400", "text-black");
+      selectedButton.classList.add("bg-white", "text-black");
   }
 
   // Default view
