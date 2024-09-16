@@ -9,6 +9,7 @@
       <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
     <style>
+
       .gradient-text {
         font-size: 3rem; /* Adjust font size as needed */
         font-weight: bold;
@@ -100,7 +101,58 @@
     .profile span {
       margin-left: 0.5rem;
     }
-    
+  .certificate-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .certificate-container p {
+    margin: 0;
+    flex: 1;
+  }
+  .certificate-container button {
+    margin-left: 10px;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+  }
 
     </style>
     <!-- Tailwind CSS -->
@@ -134,7 +186,17 @@
         onclick="showContent('student')"
       >
         <i class="fas fa-user-graduate mr-5"></i>
-        Dashboard
+        profile
+      </button>
+    </li>
+      <li>
+      <button
+        id="studentBtn"
+        class="flex items-center w-full px-3 py-3 text-left text-md font-medium tracking-wider p-2 rounded-2xl hover:bg-orange-400"
+        onclick="showContent('material')"
+      >
+        <i class="fas fa-user-graduate mr-5"></i>
+        Materials
       </button>
     </li>
     <!-- <li>
@@ -213,124 +275,213 @@
 
 <main class="flex-1 p-10 rounded-tl-2xl bg-gray-100">
           <!-- student -->  
- <div id="student" class="hidden">
- <!-- Main Container -->
-<div class="w-full bg-gray-100  ">
-  <div class="max-w-full mx-auto bg-white flex flex-row space-x-10 shadow-lg rounded-lg py-6 px-3 overflow-hidden">
-    <!-- Profile Image and Edit Icon -->
-    <!-- <div class="bg-gray-200 h-32"></div> -->
-    <div class="relative flex items-center justify-center">
-      <img id="profileImage" class="w-40 h-40 ml-10 rounded-full border-4 border-white cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" alt="Profile Image">
-      <!-- Edit Icon -->
-    <button id="editProfile" class="absolute right-2 bottom-5 bg-orange-400 p-2 rounded-full text-white hover:text-white flex items-center justify-center">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
-        <path d="M12 20h9" />
-        <path d="M16.5 3.5l4 4-12 12-4 1 1-4 12-12z" />
-    </svg>
-</button>
-
-
-    </div>
-    <!-- Profile Info -->
-    <div class="text-left px-6 py-4">
-      <h2 class="text-2xl font-semibold tracking-wide text-gray-800">John Doe</h2>
-      <p class="text-gray-600 tracking-wide">Roll Number: 12345</p>
-      <p class="text-gray-600 tracking-wide">Batch No: 2023</p>
-      <p class="text-gray-600 tracking-wide">IC Number: A1234567</p>
-      <p class="text-gray-600 tracking-wide">Phone Number: +1 234 567 890</p>
-      <p class="text-gray-600 tracking-wide">Email: johndoe@example.com</p>
+<div id="student" class="hidden">
+  <!-- Main Container -->
+  <div class="w-full bg-gray-100">
+    <div class="max-w-full mx-auto bg-white flex flex-row space-x-10 shadow-lg rounded-lg py-6 px-3 overflow-hidden">
+      <!-- Profile Image and Edit Icon -->
+      <div class="relative flex items-center justify-center">
+        <img id="profileImage" class="w-40 h-40 ml-10 rounded-full border-4 border-white cursor-pointer" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" alt="Profile Image">
+        <!-- Edit Icon -->
+        <button id="editProfile" class="absolute right-2 bottom-5 bg-orange-400 p-2 rounded-full text-white hover:text-white flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+            <path d="M12 20h9" />
+            <path d="M16.5 3.5l4 4-12 12-4 1 1-4 12-12z" />
+          </svg>
+        </button>
+      </div>
+      <!-- Profile Info -->
+      <div class="text-left px-6 py-4">
+        <h2 class="text-2xl font-semibold tracking-wide text-gray-800">John Doe</h2>
+        <p class="text-gray-600 tracking-wide">Roll Number: 12345</p>
+        <p class="text-gray-600 tracking-wide">Batch No: 2023</p>
+        <p class="text-gray-600 tracking-wide">IC Number: A1234567</p>
+        <p class="text-gray-600 tracking-wide">Phone Number: +1 234 567 890</p>
+        <p class="text-gray-600 tracking-wide">Email: johndoe@example.com</p>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Edit Profile Popup -->
-<div id="editModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
-  <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
-    <h2 class="text-2xl font-semibold mb-4 tracking-wider">Edit Profile</h2>
-    <form id="editForm" class="space-y-4">
-      <!-- Profile Image Update -->
-      <div class="flex justify-center">
-        <label for="profileImageInput" class="cursor-pointer">
-          <img id="profilePreview" class="w-[170px] h-[170px]  rounded-full border-2 border-gray-300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" alt="Profile Image">
-          <input type="file" id="profileImageInput" class="hidden" accept="image/*">
-        </label>
-      </div>
-      
-      <!-- Flex container to split into two columns -->
-      <div class="flex flex-row space-x-4">
-        <!-- Left Column -->
-        <div class="w-full md:w-1/2 space-y-4">
-          <!-- Edit Name -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">Name:</label>
-            <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="John Doe">
+  <!-- Edit Profile Popup -->
+  <div id="editModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
+      <h2 class="text-2xl font-semibold mb-4 tracking-wider">Edit Profile</h2>
+      <form id="editForm" class="space-y-4">
+        <!-- Profile Image Update -->
+        <div class="flex justify-center">
+          <label for="profileImageInput" class="cursor-pointer">
+            <img id="profilePreview" class="w-[170px] h-[170px] rounded-full border-2 border-gray-300" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxnAADWuI9eoFCeUZnraROmPu306MnHXVeEg&s" alt="Profile Image">
+            <input type="file" id="profileImageInput" class="hidden" accept="image/*">
+          </label>
+        </div>
+
+        <!-- Flex container to split into two columns -->
+        <div class="flex flex-row space-x-4">
+          <!-- Left Column -->
+          <div class="w-full md:w-1/2 space-y-4">
+            <!-- Edit Name -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">Name:</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="John Doe">
+            </div>
+            <!-- Edit Roll Number -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">Roll Number:</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="12345">
+            </div>
+            <!-- Edit Batch Number -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">Batch No:</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="2023">
+            </div>
           </div>
-          <!-- Edit Roll Number -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">Roll Number:</label>
-            <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="12345">
-          </div>
-          <!-- Edit Batch Number -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">Batch No:</label>
-            <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="2023">
+
+          <!-- Right Column -->
+          <div class="w-full md:w-1/2 space-y-4">
+            <!-- Edit IC Number -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">IC Number:</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="A1234567">
+            </div>
+            <!-- Edit Phone Number -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">Phone Number:</label>
+              <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="+1 234 567 890">
+            </div>
+            <!-- Edit Email -->
+            <div>
+              <label class="block text-gray-700 tracking-wider">Email:</label>
+              <input type="email" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="johndoe@example.com">
+            </div>
           </div>
         </div>
 
-        <!-- Right Column -->
-        <div class="w-full md:w-1/2 space-y-4">
-          <!-- Edit IC Number -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">IC Number:</label>
-            <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="A1234567">
-          </div>
-          <!-- Edit Phone Number -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">Phone Number:</label>
-            <input type="text" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="+1 234 567 890">
-          </div>
-          <!-- Edit Email -->
-          <div>
-            <label class="block text-gray-700 tracking-wider">Email:</label>
-            <input type="email" class="w-full px-4 py-2 border rounded-lg tracking-wider" value="johndoe@example.com">
-          </div>
+        <!-- Save and Cancel Buttons -->
+        <div class="flex justify-end space-x-4">
+          <button type="button" id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 tracking-wider">Cancel</button>
+          <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 tracking-wider">Save</button>
         </div>
-      </div>
-
-      <!-- Save and Cancel Buttons -->
-      <div class="flex justify-end space-x-4">
-        <button type="button" id="closeModal" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 tracking-wider">Cancel</button>
-        <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 tracking-wider">Save</button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div >
-        
-<!-- about -->
-<p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">About</p>
-<div class="flex flex-row space-x-7">
+
+  <!-- Certificate Modal -->
+  <div id="certificateModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/2">
+      <h2 class="text-2xl font-semibold mb-4 tracking-wider">Certificates</h2>
+      <div id="certificateList"></div>
+      <button id="closeCertificateModal" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 tracking-wider">Close</button>
+    </div>
+  </div>
+
+  <!-- about -->
+  <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">About</p>
+  <div class="flex flex-row space-x-7">
     <div class="bg-white flex flex-col w-[237px] rounded-md">
-        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >4</p>
-        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Ongoing Course</p>
+      <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider">4</p>
+      <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Ongoing Course</p>
     </div>
-       <div class="bg-white flex flex-col w-[237px] rounded-md">
-        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >20</p>
-        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">completed Course</p>
-    </div> 
-       <div class="bg-white flex flex-col w-[237px] rounded-md">
-        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >10</p>
-        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Certificate</p>
+    <div class="bg-white flex flex-col w-[237px] rounded-md">
+      <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider">20</p>
+      <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Completed Course</p>
     </div>
-    
-       <div onclick="showContent('result')" class="bg-white flex flex-col w-[237px] rounded-md cursor-pointer">
-        <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider" >2</p>
-        <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Result</p>
+    <div class="bg-white flex flex-col w-[237px] rounded-md cursor-pointer" onclick="showCertificateModal()">
+      <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider">10</p>
+      <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Certificate</p>
     </div>
+    <div onclick="showContent('result')" class="bg-white flex flex-col w-[237px] rounded-md cursor-pointer">
+      <p class="px-2 py-2 mt-2 text-center text-3xl font-medium text-orange-400 uppercase tracking-wider">2</p>
+      <p class="px-10 mt-2 mb-4 text-center text-sm font-medium text-gray-800 uppercase tracking-wider">Result</p>
+    </div>
+  </div>
+  <!-- about -->
+
+  <!-- JavaScript to handle modal and profile image change -->
+  <script>
+    // Get elements
+    const editProfile = document.getElementById('editProfile');
+    const editModal = document.getElementById('editModal');
+    const closeModal = document.getElementById('closeModal');
+    const profileImage = document.getElementById('profileImage');
+    const profilePreview = document.getElementById('profilePreview');
+    const profileImageInput = document.getElementById('profileImageInput');
+
+    // Show edit modal when clicking edit button
+    editProfile.addEventListener('click', () => {
+      editModal.classList.remove('hidden');
+    });
+
+    // Close modal when clicking cancel button
+    closeModal.addEventListener('click', () => {
+      editModal.classList.add('hidden');
+    });
+
+    // Update profile image preview when an image is selected
+    profileImageInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          profileImage.src = event.target.result;
+          profilePreview.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+ <script>
+    // Sample certificate data
+    const certificates = [
+      { sno: 1, name: 'Certificate 1', url: 'path/to/certificate1.pdf' },
+      { sno: 2, name: 'Certificate 2', url: 'path/to/certificate2.pdf' },
+      // Add more certificates as needed
+    ];
+
+    // Function to show the certificate modal
+    function showCertificateModal() {
+      const certificateModal = document.getElementById('certificateModal');
+      const certificateList = document.getElementById('certificateList');
+
+      // Clear previous content
+      certificateList.innerHTML = '';
+
+      // Populate certificate list
+      certificates.forEach(certificate => {
+        const certificateItem = document.createElement('div');
+        certificateItem.classList.add('certificate-container');
+        certificateItem.innerHTML = `
+          <p>${certificate.sno}. ${certificate.name}</p>
+          <button onclick="viewCertificate('${certificate.url}')" class="px-4 py-2 bg-orange-400 text-white rounded-md">View Certificate</button>
+        `;
+        certificateList.appendChild(certificateItem);
+      });
+
+      // Show the modal
+      certificateModal.style.display = 'flex';
+    }
+
+    // Function to view the certificate document
+    function viewCertificate(url) {
+      window.open(url, '_blank');
+    }
+
+    // Close the certificate modal
+    document.getElementById('closeCertificateModal').addEventListener('click', () => {
+      document.getElementById('certificateModal').style.display = 'none';
+    });
+  </script>
 </div>
-<!-- about -->
-           
-<!-- course -->
-<p class="px-2 py-4 mt-5 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course</p>
+
+    <!-- student -->
+
+
+
+
+
+<!-- material -->
+    <div id="material" class="hidden">
+<p class="px-2   text-left text-md font-medium text-gray-800 uppercase tracking-wider">Course</p>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
   <div class="w-[325px] bg-white p-4 shadow-lg">
   <!-- Profile Image -->
@@ -522,46 +673,10 @@
       </div>
     </div>
   </div>
+    </div>
+<!-- material -->
 
 
-<!-- JavaScript to handle modal and profile image change -->
-<script>
-  // Get elements
-  const editProfile = document.getElementById('editProfile');
-  const editModal = document.getElementById('editModal');
-  const closeModal = document.getElementById('closeModal');
-  const profileImage = document.getElementById('profileImage');
-  const profilePreview = document.getElementById('profilePreview');
-  const profileImageInput = document.getElementById('profileImageInput');
-
-  // Show edit modal when clicking edit button
-  editProfile.addEventListener('click', () => {
-    editModal.classList.remove('hidden');
-  });
-
-  // Close modal when clicking cancel button
-  closeModal.addEventListener('click', () => {
-    editModal.classList.add('hidden');
-  });
-
-  // Update profile image preview when an image is selected
-  profileImageInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(event) {
-        profileImage.src = event.target.result;
-        profilePreview.src = event.target.result;
-      }
-      reader.readAsDataURL(file);
-    }
-  });
-</script>
- </div>
- 
-
-
-    <!-- student -->
 
 
 
@@ -760,7 +875,7 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
  <!-- Internal exam assign -->
 <div id="assign" class="hidden">
     <div class="flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">
+        <p class="px-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">
             Take Internal Test
         </p>
     </div>
@@ -807,8 +922,8 @@ handleTabClick('finalTab', 'finalResults', 'finalResultsTable', finalResultsData
 
 
 <div id="final" class="hidden">
-    <div class="py-3 flex justify-between items-center">
-        <p class="px-2 py-4 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Take Final Exam</p>
+    <div class=" flex justify-between items-center">
+        <p class="px-2 text-left text-md font-medium text-gray-800 uppercase tracking-wider">Take Final Exam</p>
     </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="w-[325px] bg-white p-4 shadow-lg">

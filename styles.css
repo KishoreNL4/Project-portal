@@ -1,0 +1,384 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  transform: rotate(-45deg);
+}
+
+.star {
+  --star-color: rgb(204, 204, 239);
+  --star-tail-length: 6em;
+  --star-tail-height: 2px;
+  --star-width: calc(var(--star-tail-length) / 6);
+  --fall-duration: 9s;
+  --tail-fade-duration: var(--fall-duration);
+  position: absolute;
+  top: var(--top-offset);
+  left: 0;
+  width: var(--star-tail-length);
+  height: var(--star-tail-height);
+  color: var(--star-color);
+  background: linear-gradient(45deg, currentColor, transparent);
+  border-radius: 50%;
+  filter: drop-shadow(0 0 6px currentColor);
+  transform: translate3d(104em, 0, 0);
+  animation: fall var(--fall-duration) var(--fall-delay) linear infinite, tail-fade var(--tail-fade-duration) var(--fall-delay) ease-out infinite;
+}
+@media screen and (max-width: 750px) {
+  .star {
+    animation: fall var(--fall-duration) var(--fall-delay) linear infinite;
+  }
+}
+.star:nth-child(1) {
+  --star-tail-length: 6.59em;
+  --top-offset: 62.88vh;
+  --fall-duration: 10.943s;
+  --fall-delay: 2.044s;
+}
+.star:nth-child(2) {
+  --star-tail-length: 7.47em;
+  --top-offset: 57.75vh;
+  --fall-duration: 8.501s;
+  --fall-delay: 8.751s;
+}
+.star:nth-child(3) {
+  --star-tail-length: 5.98em;
+  --top-offset: 47.78vh;
+  --fall-duration: 6.001s;
+  --fall-delay: 6.093s;
+}
+.star:nth-child(4) {
+  --star-tail-length: 6.43em;
+  --top-offset: 97.71vh;
+  --fall-duration: 8.733s;
+  --fall-delay: 9.864s;
+}
+.star:nth-child(5) {
+  --star-tail-length: 7.05em;
+  --top-offset: 17.63vh;
+  --fall-duration: 9.155s;
+  --fall-delay: 3.141s;
+}
+.star:nth-child(6) {
+  --star-tail-length: 6.23em;
+  --top-offset: 2.05vh;
+  --fall-duration: 6.535s;
+  --fall-delay: 9.801s;
+}
+.star:nth-child(7) {
+  --star-tail-length: 7.01em;
+  --top-offset: 81.98vh;
+  --fall-duration: 10.089s;
+  --fall-delay: 9.843s;
+}
+.star:nth-child(8) {
+  --star-tail-length: 6.91em;
+  --top-offset: 96.34vh;
+  --fall-duration: 6.681s;
+  --fall-delay: 1.23s;
+}
+.star:nth-child(9) {
+  --star-tail-length: 6.98em;
+  --top-offset: 33.5vh;
+  --fall-duration: 8.374s;
+  --fall-delay: 0.107s;
+}
+.star:nth-child(10) {
+  --star-tail-length: 6.19em;
+  --top-offset: 18.41vh;
+  --fall-duration: 6.831s;
+  --fall-delay: 5.87s;
+}
+.star:nth-child(11) {
+  --star-tail-length: 5.93em;
+  --top-offset: 65.87vh;
+  --fall-duration: 6.705s;
+  --fall-delay: 1.704s;
+}
+.star:nth-child(12) {
+  --star-tail-length: 6.91em;
+  --top-offset: 66.56vh;
+  --fall-duration: 8.541s;
+  --fall-delay: 5.24s;
+}
+.star:nth-child(13) {
+  --star-tail-length: 6.25em;
+  --top-offset: 65.82vh;
+  --fall-duration: 6.596s;
+  --fall-delay: 3.174s;
+}
+.star:nth-child(14) {
+  --star-tail-length: 6.39em;
+  --top-offset: 57.7vh;
+  --fall-duration: 6.032s;
+  --fall-delay: 0.745s;
+}
+.star:nth-child(15) {
+  --star-tail-length: 5.98em;
+  --top-offset: 43.85vh;
+  --fall-duration: 8.679s;
+  --fall-delay: 8.035s;
+}
+.star:nth-child(16) {
+  --star-tail-length: 5.99em;
+  --top-offset: 45.05vh;
+  --fall-duration: 6.591s;
+  --fall-delay: 6.152s;
+}
+.star:nth-child(17) {
+  --star-tail-length: 6.3em;
+  --top-offset: 22.76vh;
+  --fall-duration: 9.07s;
+  --fall-delay: 1.927s;
+}
+.star:nth-child(18) {
+  --star-tail-length: 6.62em;
+  --top-offset: 55.52vh;
+  --fall-duration: 9.59s;
+  --fall-delay: 5.799s;
+}
+.star:nth-child(19) {
+  --star-tail-length: 5.04em;
+  --top-offset: 86vh;
+  --fall-duration: 7.009s;
+  --fall-delay: 4.667s;
+}
+.star:nth-child(20) {
+  --star-tail-length: 5.48em;
+  --top-offset: 71.49vh;
+  --fall-duration: 9.529s;
+  --fall-delay: 8.8s;
+}
+.star:nth-child(21) {
+  --star-tail-length: 5.51em;
+  --top-offset: 68.6vh;
+  --fall-duration: 10.416s;
+  --fall-delay: 4.498s;
+}
+.star:nth-child(22) {
+  --star-tail-length: 6.67em;
+  --top-offset: 28.28vh;
+  --fall-duration: 6.903s;
+  --fall-delay: 5.465s;
+}
+.star:nth-child(23) {
+  --star-tail-length: 5.09em;
+  --top-offset: 69.93vh;
+  --fall-duration: 10.931s;
+  --fall-delay: 8.557s;
+}
+.star:nth-child(24) {
+  --star-tail-length: 5.24em;
+  --top-offset: 14.24vh;
+  --fall-duration: 9.81s;
+  --fall-delay: 4.009s;
+}
+.star:nth-child(25) {
+  --star-tail-length: 5.45em;
+  --top-offset: 91.71vh;
+  --fall-duration: 9.537s;
+  --fall-delay: 0.891s;
+}
+.star:nth-child(26) {
+  --star-tail-length: 7.25em;
+  --top-offset: 48.79vh;
+  --fall-duration: 11.765s;
+  --fall-delay: 5.133s;
+}
+.star:nth-child(27) {
+  --star-tail-length: 6.55em;
+  --top-offset: 80.06vh;
+  --fall-duration: 10.916s;
+  --fall-delay: 0.017s;
+}
+.star:nth-child(28) {
+  --star-tail-length: 5.29em;
+  --top-offset: 75.02vh;
+  --fall-duration: 8.963s;
+  --fall-delay: 8.011s;
+}
+.star:nth-child(29) {
+  --star-tail-length: 5.82em;
+  --top-offset: 58.92vh;
+  --fall-duration: 8.679s;
+  --fall-delay: 1.789s;
+}
+.star:nth-child(30) {
+  --star-tail-length: 6.17em;
+  --top-offset: 78.27vh;
+  --fall-duration: 10.542s;
+  --fall-delay: 3.637s;
+}
+.star:nth-child(31) {
+  --star-tail-length: 6.79em;
+  --top-offset: 71.43vh;
+  --fall-duration: 10.119s;
+  --fall-delay: 8.287s;
+}
+.star:nth-child(32) {
+  --star-tail-length: 6.32em;
+  --top-offset: 93.03vh;
+  --fall-duration: 11.742s;
+  --fall-delay: 8.118s;
+}
+.star:nth-child(33) {
+  --star-tail-length: 7em;
+  --top-offset: 76.19vh;
+  --fall-duration: 6.772s;
+  --fall-delay: 2.261s;
+}
+.star:nth-child(34) {
+  --star-tail-length: 7.36em;
+  --top-offset: 87.21vh;
+  --fall-duration: 7.794s;
+  --fall-delay: 6.411s;
+}
+.star:nth-child(35) {
+  --star-tail-length: 7em;
+  --top-offset: 19.43vh;
+  --fall-duration: 8.933s;
+  --fall-delay: 3.396s;
+}
+.star:nth-child(36) {
+  --star-tail-length: 6.35em;
+  --top-offset: 82.31vh;
+  --fall-duration: 9.303s;
+  --fall-delay: 3.485s;
+}
+.star:nth-child(37) {
+  --star-tail-length: 7.26em;
+  --top-offset: 26.4vh;
+  --fall-duration: 10.731s;
+  --fall-delay: 1.262s;
+}
+.star:nth-child(38) {
+  --star-tail-length: 5.85em;
+  --top-offset: 12.94vh;
+  --fall-duration: 8.195s;
+  --fall-delay: 3.71s;
+}
+.star:nth-child(39) {
+  --star-tail-length: 7.44em;
+  --top-offset: 78.18vh;
+  --fall-duration: 9.251s;
+  --fall-delay: 0.515s;
+}
+.star:nth-child(40) {
+  --star-tail-length: 5.64em;
+  --top-offset: 3.2vh;
+  --fall-duration: 11.864s;
+  --fall-delay: 2.506s;
+}
+.star:nth-child(41) {
+  --star-tail-length: 6.81em;
+  --top-offset: 77.21vh;
+  --fall-duration: 7.779s;
+  --fall-delay: 1.442s;
+}
+.star:nth-child(42) {
+  --star-tail-length: 6.53em;
+  --top-offset: 18.01vh;
+  --fall-duration: 9.349s;
+  --fall-delay: 8.458s;
+}
+.star:nth-child(43) {
+  --star-tail-length: 5.91em;
+  --top-offset: 16.64vh;
+  --fall-duration: 9.394s;
+  --fall-delay: 3.11s;
+}
+.star:nth-child(44) {
+  --star-tail-length: 6.45em;
+  --top-offset: 89.46vh;
+  --fall-duration: 11.349s;
+  --fall-delay: 8.881s;
+}
+.star:nth-child(45) {
+  --star-tail-length: 7.3em;
+  --top-offset: 26.18vh;
+  --fall-duration: 9.214s;
+  --fall-delay: 9.027s;
+}
+.star:nth-child(46) {
+  --star-tail-length: 6.47em;
+  --top-offset: 29.18vh;
+  --fall-duration: 6.964s;
+  --fall-delay: 0.464s;
+}
+.star:nth-child(47) {
+  --star-tail-length: 5.58em;
+  --top-offset: 38.95vh;
+  --fall-duration: 10.477s;
+  --fall-delay: 0.873s;
+}
+.star:nth-child(48) {
+  --star-tail-length: 7.16em;
+  --top-offset: 90.53vh;
+  --fall-duration: 7.442s;
+  --fall-delay: 1.233s;
+}
+.star:nth-child(49) {
+  --star-tail-length: 6.03em;
+  --top-offset: 54.34vh;
+  --fall-duration: 9.355s;
+  --fall-delay: 8.574s;
+}
+.star:nth-child(50) {
+  --star-tail-length: 5.02em;
+  --top-offset: 90.06vh;
+  --fall-duration: 6.102s;
+  --fall-delay: 4.28s;
+}
+.star::before, .star::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: calc(var(--star-width) / -2);
+  width: var(--star-width);
+  height: 100%;
+  background: linear-gradient(45deg, transparent, currentColor, transparent);
+  border-radius: inherit;
+  animation: blink 2s linear infinite;
+}
+.star::before {
+  transform: rotate(45deg);
+}
+.star::after {
+  transform: rotate(-45deg);
+}
+
+@keyframes fall {
+  to {
+    transform: translate3d(-30em, 0, 0);
+  }
+}
+@keyframes tail-fade {
+  0%, 50% {
+    width: var(--star-tail-length);
+    opacity: 1;
+  }
+  70%, 80% {
+    width: 0;
+    opacity: 0.4;
+  }
+  100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0.6;
+  }
+}/*# sourceMappingURL=styles.css.map */
